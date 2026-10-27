@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ather Nawaz, Senior Data Engineer</title>
-<meta name="description" content="Ather Nawaz, Senior Data Engineer in Ingolstadt. Seven years building and running a logistics company's data platform: Azure, Databricks, dbt, Python, SQL.">
+<title>Ather Nawaz, AI Data Engineer</title>
+<meta name="description" content="Ather Nawaz, AI Data Engineer in Ingolstadt. Seven years running a production data platform; building the retrieval, embedding and evaluation layer that LLM systems depend on.">
 <meta name="author" content="Ather Nawaz">
-<meta property="og:title" content="Ather Nawaz, Senior Data Engineer">
+<meta property="og:title" content="Ather Nawaz, AI Data Engineer">
 <meta property="og:description" content="Seven years moving parcels' data from scanner to dashboard. The platform, the numbers and the route here.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#e3e5e6">
@@ -138,6 +138,14 @@ svg#dag{display:block;width:100%;height:auto}
 .inspect .hint{font:500 11px var(--mono);color:var(--ink-2);white-space:nowrap}
 @media (max-width:820px){.inspect{grid-template-columns:1fr;gap:8px}.inspect .hint{white-space:normal}}
 
+.lessons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);border-top:0;background:var(--label)}
+.lessons > div{padding:18px}
+.lessons > div + div{border-left:2px solid var(--ink)}
+.lessons h3{margin:0 0 6px;font:800 18px/1.15 var(--wide);font-variation-settings:"wdth" 108}
+.lessons p{margin:0;color:var(--ink-2);font-size:15px}
+@media (max-width:980px){.lessons{grid-template-columns:repeat(2,minmax(0,1fr))}.lessons > div:nth-child(3){border-left:0}.lessons > div:nth-child(n+3){border-top:2px solid var(--ink)}}
+@media (max-width:560px){.lessons{grid-template-columns:1fr}.lessons > div + div{border-left:0;border-top:2px solid var(--ink)}}
+
 /* ---------- results as manifest with before/after bars ---------- */
 .manifest{border-top:2px solid var(--ink)}
 .line{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.5fr) minmax(0,1fr);gap:32px;padding:26px 0;border-bottom:1px solid var(--rule);align-items:center}
@@ -240,6 +248,7 @@ svg#dag{display:block;width:100%;height:auto}
   <div class="bar">
     <a class="id" href="#top">Ather Nawaz</a>
     <nav aria-label="Sections">
+      <a class="opt" href="#ai">AI</a>
       <a class="opt" href="#platform">Platform</a>
       <a class="opt" href="#results">Results</a>
       <a class="opt" href="#route">Experience</a>
@@ -252,11 +261,11 @@ svg#dag{display:block;width:100%;height:auto}
   <header class="hero" id="top">
     <div>
       <h1><span>Ather</span><span>Nawaz</span></h1>
-      <p class="pitch">Senior Data Engineer. Seven years getting parcels' data from the scanner to the dashboard.</p>
-      <p class="why">I was the first IT and data hire at SCA Logistics &amp; Fulfilment in Ingolstadt. The platform that now moves 300,000 records a day is one I designed, built and still run. I'm looking for the next one.</p>
+      <p class="pitch">AI Data Engineer. I build the data an LLM can actually be trusted with.</p>
+      <p class="why">Seven years running a production data platform at SCA Logistics &amp; Fulfilment, 300,000 records a day, built from nothing. Alongside it I build retrieval, embedding and guardrail pipelines for LLM tools. Most AI problems I've seen turned out to be data problems.</p>
       <div class="cta">
         <a class="btn primary" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
-        <a class="btn" href="#platform">See the platform</a>
+        <a class="btn" href="#ai">See the AI pipeline</a>
       </div>
     </div>
 
@@ -268,10 +277,10 @@ svg#dag{display:block;width:100%;height:auto}
           <div class="cell"><span class="k">TO</span><span class="v">Your data team<br>Munich, remote or relocation</span></div>
         </div>
         <div class="row">
-          <div class="cell full svc"><div><span class="k">SERVICE</span><span class="v">Senior Data Engineer, permanent</span></div><span class="big">DE</span></div>
+          <div class="cell full svc"><div><span class="k">SERVICE</span><span class="v">AI / Senior Data Engineer, permanent</span></div><span class="big">DE</span></div>
         </div>
         <div class="row">
-          <div class="cell"><span class="k">CONTENTS</span><span class="v">dbt, Databricks, PySpark, SQL, Azure</span></div>
+          <div class="cell"><span class="k">CONTENTS</span><span class="v">RAG, pgvector, dbt, Databricks, PySpark</span></div>
           <div class="cell"><span class="k">IN SERVICE</span><span class="big">7 yrs</span></div>
         </div>
         <div class="row">
@@ -291,10 +300,35 @@ svg#dag{display:block;width:100%;height:auto}
 </div>
 
 <div class="wrap">
+  <section id="ai">
+    <div class="sh">
+      <h2>The data layer an LLM depends on</h2>
+      <p>How my AI tools are wired, from Pipeline Doctor and dbt-contracts. Built in my own projects, not at SCA. Select a box to see the decision behind it.</p>
+    </div>
+    <div class="board">
+      <div class="board-top">
+        <strong>Retrieval, generation and guardrails</strong>
+        <div class="legend"><span><i class="ext"></i>Input</span><span><i></i>Built by me</span><span><i class="hot"></i>Selected</span></div>
+      </div>
+      <svg id="aidag" role="img" aria-label="Pipeline graph of the AI tools"></svg>
+      <div class="inspect" aria-live="polite">
+        <div><h3 id="a-title"></h3><p class="tech mono" id="a-tech"></p></div>
+        <p id="a-text"></p>
+        <span class="hint">Click or tab through the boxes</span>
+      </div>
+    </div>
+    <div class="lessons">
+      <div><h3>Retrieval beats the model</h3><p>Swapping models changed little. Filtering by metadata before ranking, and passing real lineage, changed answers a lot.</p></div>
+      <div><h3>The LLM proposes, tests decide</h3><p>Generated contracts and SQL only count after dbt tests pass in CI. Code that runs can still be wrong.</p></div>
+      <div><h3>Ground it in metadata</h3><p>Hallucinated column names stopped once the prompt held only what the dbt manifest actually contains.</p></div>
+      <div><h3>AI in my daily work</h3><p>I use coding agents with MCP servers every day for models, tests and docs, and review every change myself.</p></div>
+    </div>
+  </section>
+
   <section id="platform">
     <div class="sh">
-      <h2>The platform I built, as it runs today</h2>
-      <p>Every box is a real component at SCA. Select one to trace what feeds it and what depends on it, the same check I run before changing a model.</p>
+      <h2>The production platform underneath</h2>
+      <p>Every box is a real component I run at SCA. Clean, tested, documented data like this is what any AI feature on top would stand on.</p>
     </div>
     <div class="board">
       <div class="board-top">
@@ -396,29 +430,29 @@ svg#dag{display:block;width:100%;height:auto}
 
   <section id="projects">
     <div class="sh">
-      <h2>Built after hours</h2>
-      <p>Where I try tools before I'd trust them in production. All public on GitHub.</p>
+      <h2>AI and data tools I've built</h2>
+      <p>Built after work, deployed, and public on GitHub. The AI ones come first because that's where I'm heading.</p>
     </div>
     <div class="shelf">
       <article class="box wide">
-        <header><span>Lakehouse</span><span>Azure Databricks</span></header>
-        <div class="in"><h3>BookWorm Data Platform</h3><p>Medallion lakehouse on Azure Databricks over 2.36 million books and 15.7 million reviews, with role-based access in Unity Catalog and CI/CD.</p><div class="stack">databricks / delta lake / dbt, 43 tests / unity catalog</div><div class="go"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">View code</a></div></div>
+        <header><span>RAG</span><span>AWS Lambda</span></header>
+        <div class="in"><h3>Pipeline Doctor</h3><p>Ask why a data pipeline failed and get an answer that cites the logs, runbooks and lineage it used. Metadata filtering before vector ranking made the difference.</p><div class="stack">llamaindex / pgvector / embeddings / llm apis / lambda</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box wide">
-                <header><span>Data contracts</span><span class="livetag">Live web app</span></header>
-        <div class="in"><h3>dbt-contracts</h3><p>Generates data contracts for dbt models with an LLM and enforces them in CI. A person approves every contract before it applies.</p><div class="stack">dbt / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
+        <header><span>LLM + data contracts</span><span class="livetag">Live web app</span></header>
+        <div class="in"><h3>dbt-contracts</h3><p>An LLM drafts data contracts for dbt models; CI enforces them with dbt tests, and a person approves each one before it applies.</p><div class="stack">llm apis / dbt / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
+      </article>
+      <article class="box">
+        <header><span>LLM + lineage</span><span>Web app</span></header>
+        <div class="in"><h3>dbt Lineage Explorer</h3><p>Lineage graph for any dbt project, with LLM-written notes on what a change would affect, grounded only in the manifest.</p><div class="stack">networkx / react flow / llm apis</div><div class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
+      </article>
+      <article class="box">
+        <header><span>Lakehouse</span><span>Azure Databricks</span></header>
+        <div class="in"><h3>BookWorm Data Platform</h3><p>Medallion lakehouse over 2.36 million books and 15.7 million reviews: the kind of clean text corpus retrieval needs.</p><div class="stack">databricks / delta / dbt, 43 tests / unity catalog</div><div class="go"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box">
         <header><span>Lakehouse</span><span>Open source stack</span></header>
         <div class="in"><h3>Zero-Copy Lakehouse</h3><p>DuckDB, Iceberg and dbt as a low-cost lakehouse, with time travel and a cost comparison against a cloud warehouse.</p><div class="stack">duckdb / iceberg / dbt</div><div class="go"><a href="https://github.com/ATHARNAWAZ/zero-copy-lakehouse" target="_blank" rel="noopener">View code</a></div></div>
-      </article>
-      <article class="box">
-        <header><span>Debugging</span><span>AWS</span></header>
-        <div class="in"><h3>Pipeline Doctor</h3><p>Retrieval-based assistant for failed pipelines. Lesson learned: retrieval quality mattered more than the model.</p><div class="stack">lambda / pgvector / llamaindex</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
-      </article>
-      <article class="box">
-        <header><span>Lineage</span><span>Web app</span></header>
-        <div class="in"><h3>dbt Lineage Explorer</h3><p>Interactive lineage for any dbt project, with plain-language notes on what a change would affect.</p><div class="stack">dbt manifest / networkx / react flow</div><div class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
       </article>
     </div>
   </section>
@@ -431,8 +465,10 @@ svg#dag{display:block;width:100%;height:auto}
     <div class="tools">
       <div class="prod"><h3>In production, every day</h3><p class="note">At SCA, since 2019</p>
         <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PySpark</span><span class="chip">dbt</span><span class="chip">Databricks</span><span class="chip">Delta Lake</span><span class="chip">Unity Catalog</span><span class="chip">Azure Data Factory</span><span class="chip">ADLS Gen2</span><span class="chip">SQL Server</span><span class="chip">Power BI</span><span class="chip">GitHub Actions</span><span class="chip">Docker</span><span class="chip">FastAPI</span></div></div>
-      <div><h3>In my own projects</h3><p class="note">Built, deployed and documented on GitHub</p>
-        <div class="chips"><span class="chip">Apache Iceberg</span><span class="chip">DuckDB</span><span class="chip">Airflow</span><span class="chip">Dagster</span><span class="chip">Snowflake</span><span class="chip">AWS S3, Glue, Athena, Lambda</span><span class="chip">Kafka</span><span class="chip">Terraform</span><span class="chip">LLM APIs, RAG</span></div></div>
+      <div><h3>AI, in my own projects</h3><p class="note">Built, deployed and documented on GitHub</p>
+        <div class="chips"><span class="chip">RAG pipelines</span><span class="chip">pgvector</span><span class="chip">Chroma</span><span class="chip">Pinecone</span><span class="chip">LlamaIndex</span><span class="chip">LangChain</span><span class="chip">sentence-transformers</span><span class="chip">Embeddings</span><span class="chip">LLM APIs: OpenAI, Anthropic</span><span class="chip">MCP</span><span class="chip">MLflow</span></div>
+        <h3 style="margin-top:22px">Data, in my own projects</h3>
+        <div class="chips" style="margin-top:10px"><span class="chip">Apache Iceberg</span><span class="chip">DuckDB</span><span class="chip">Airflow</span><span class="chip">Dagster</span><span class="chip">Snowflake</span><span class="chip">AWS S3, Glue, Athena, Lambda</span><span class="chip">Kafka</span><span class="chip">Terraform</span></div></div>
     </div>
     <div class="facts">
       <div><span class="k">EDUCATION</span><div class="v">BSc Computer Science, Iqra University</div></div>
@@ -444,8 +480,8 @@ svg#dag{display:block;width:100%;height:auto}
 
 <footer class="dispatch" id="contact">
   <div class="wrap">
-    <h2>Ready to ship to your team.</h2>
-    <p>Permanent Senior Data, Analytics or Data Platform Engineer roles in Munich, remote in Germany, or with relocation. Start date 1 January 2027.</p>
+    <h2>Ready to build your AI data layer.</h2>
+    <p>Permanent AI Data Engineer or Senior Data Engineer roles in Munich, remote in Germany, or with relocation. Start date 1 January 2027.</p>
     <div class="cta">
       <a class="btn primary" href="mailto:atharnawaz@live.com">Email atharnawaz@live.com</a>
       <a class="btn" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
@@ -483,9 +519,101 @@ svg#dag{display:block;width:100%;height:auto}
   if(!reduce){document.getElementById('scan').classList.add('run');}
   document.getElementById('stamp').classList.add('on');
 
-  /* lineage graph */
-  var cols=['SOURCES','INGESTION','BRONZE','SILVER, DBT','GOLD, DBT','USED BY'];
-  var N=[
+  /* reusable lineage graph */
+  function graph(cfg){
+    var N=cfg.N,E=cfg.E,cols=cfg.cols,byId={},svg=document.getElementById(cfg.svg),current=cfg.start,gP,nw,nh;
+    N.forEach(function(n){byId[n.id]=n;});
+    function layout(){
+      var w=svg.parentNode.clientWidth,vertical=w<760,W,H,rows=cfg.rows||4;
+      while(svg.firstChild)svg.removeChild(svg.firstChild);
+      if(!vertical){
+        nw=156;nh=48;W=1140;var left=18,gx=(W-left*2-nw)/(cols.length-1),top=44,gy=74;H=top+rows*gy+8;
+        N.forEach(function(n){n.x=left+n.c*gx;n.y=top+n.r*gy;});
+        cols.forEach(function(c,i){el('text',{x:left+i*gx,y:26,'class':'colhead'},svg).textContent=c;});
+      } else {
+        nw=146;nh=48;W=330;var y=34,groups={};
+        N.forEach(function(n){(groups[n.c]=groups[n.c]||[]).push(n);});
+        Object.keys(groups).forEach(function(c){
+          el('text',{x:12,y:y-10,'class':'colhead'},svg).textContent=cols[c];
+          groups[c].forEach(function(n,i){n.x=12+(i%2)*(nw+14);n.y=y+Math.floor(i/2)*60;});
+          y+=Math.ceil(groups[c].length/2)*60+40;
+        });
+        H=y-12;
+      }
+      svg.setAttribute('viewBox','0 0 '+W+' '+H);
+      var gE=el('g',{},svg),gN=el('g',{},svg);gP=el('g',{},svg);
+      E.forEach(function(e){
+        var a=byId[e[0]],b=byId[e[1]],d,x1,y1,x2,y2,m;
+        if(!vertical){x1=a.x+nw;y1=a.y+nh/2;x2=b.x;y2=b.y+nh/2;m=(x1+x2)/2;d='M'+x1+','+y1+' C'+m+','+y1+' '+m+','+y2+' '+x2+','+y2;}
+        else{x1=a.x+nw/2;y1=a.y+nh;x2=b.x+nw/2;y2=b.y;m=(y1+y2)/2;d='M'+x1+','+y1+' C'+x1+','+m+' '+x2+','+m+' '+x2+','+y2;}
+        e.p=el('path',{d:d,'class':'edge'},gE);
+      });
+      N.forEach(function(n){
+        var g=el('g',{'class':'node'+(n.ext?' ext':'')+(n.ai?' ai':''),transform:'translate('+n.x+','+n.y+')',tabindex:0,role:'button','aria-label':n.h},gN);
+        el('rect',{'class':'box',width:nw,height:nh},g);
+        el('text',{x:10,y:20,'class':'t'},g).textContent=n.t;
+        el('text',{x:10,y:37,'class':'s'},g).textContent=n.s;
+        n.g=g;
+        g.addEventListener('click',function(){select(n.id,true);});
+        g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(n.id,true);}});
+      });
+      select(current,false);
+    }
+    function related(id){
+      var all={};all[id]=1;
+      (function up(x){E.forEach(function(e){if(e[1]===x&&!all[e[0]]){all[e[0]]=1;up(e[0]);}});})(id);
+      (function dn(x){E.forEach(function(e){if(e[0]===x&&!all[e[1]]){all[e[1]]=1;dn(e[1]);}});})(id);
+      return all;
+    }
+    function select(id,animate){
+      current=id;var n=byId[id],rel=related(id);
+      N.forEach(function(m){m.g.classList.toggle('sel',m.id===id);m.g.classList.toggle('dim',!rel[m.id]);});
+      var path=E.filter(function(e){var on=rel[e[0]]&&rel[e[1]];e.p.classList.toggle('on',on);return on;});
+      document.getElementById(cfg.ids[0]).textContent=n.h;
+      document.getElementById(cfg.ids[1]).textContent=n.k;
+      document.getElementById(cfg.ids[2]).textContent=n.d;
+      if(animate&&!reduce)flow(path);
+    }
+    function flow(edges){
+      while(gP.firstChild)gP.removeChild(gP.firstChild);
+      edges.forEach(function(e){
+        var r=el('rect',{width:9,height:7,'class':'pkt',opacity:0},gP),p=e.p,len=p.getTotalLength(),start=performance.now()+byId[e[0]].c*260,dur=700;
+        (function step(now){var t=(now-start)/dur;
+          if(t<0){return requestAnimationFrame(step);} if(t>1){r.remove();return;}
+          var pt=p.getPointAtLength(t*len);r.setAttribute('x',pt.x-4.5);r.setAttribute('y',pt.y-3.5);r.setAttribute('opacity',1);requestAnimationFrame(step);
+        })(performance.now());
+      });
+    }
+    layout();
+    var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150);});
+  }
+
+  /* AI data layer, from my own projects */
+  graph({svg:'aidag',ids:['a-title','a-tech','a-text'],start:'ret',rows:3,
+    cols:['SOURCES','PREPARE','INDEX','RETRIEVE','GENERATE','GUARDRAILS'],
+    N:[
+      {id:'logs',c:0,r:0,t:'run_logs',s:'dbt and pipeline errors',ext:1,h:'Pipeline run logs',k:'dbt run results, error output',d:'Failed runs and their error messages: the questions people actually ask an assistant.'},
+      {id:'man',c:0,r:1,t:'dbt_manifest',s:'models, columns, lineage',ext:1,h:'dbt manifest',k:'manifest.json, catalog.json',d:'The ground truth about models, columns and dependencies. Everything the LLM says gets checked against it.'},
+      {id:'docs',c:0,r:2,t:'runbooks',s:'docs and past fixes',ext:1,h:'Runbooks and docs',k:'Markdown, past incidents',d:'How earlier failures were fixed. Often more useful than the model\'s general knowledge.'},
+      {id:'chunk',c:1,r:0,t:'chunking',s:'per model, per error',h:'Chunking with metadata',k:'Python',d:'Split by model and by error, keeping model name, layer and timestamp as metadata so retrieval can filter instead of guess.'},
+      {id:'graph',c:1,r:1,t:'lineage_graph',s:'NetworkX from manifest',h:'Lineage graph',k:'NetworkX',d:'Upstream and downstream of every model, built from the manifest. Gives the LLM real impact information instead of letting it invent it.'},
+      {id:'emb',c:2,r:0,t:'embeddings',s:'sentence-transformers',h:'Embeddings',k:'sentence-transformers, embedding APIs',d:'Chunks turned into vectors. Re-embedded only when the source changes, not on every run.'},
+      {id:'vec',c:2,r:1,t:'pgvector',s:'vectors + metadata',h:'Vector store',k:'PostgreSQL with pgvector',d:'Vectors next to their metadata in Postgres, so a query can filter by model or layer before it ranks by similarity.'},
+      {id:'ret',c:3,r:1,t:'retriever',s:'filter, then rank',h:'Retrieval',k:'LlamaIndex, pgvector',d:'Metadata filter first, similarity second, plus the lineage of the failing model. The biggest lesson from Pipeline Doctor: answer quality followed retrieval quality, not model choice.'},
+      {id:'llm',c:4,r:1,t:'llm_call',s:'only retrieved context',h:'Generation',k:'LLM APIs (OpenAI, Anthropic), AWS Lambda',d:'The model only sees the retrieved context and is asked to cite it. Runs serverless on Lambda.'},
+      {id:'ans',c:4,r:0,t:'answer',s:'with sources',h:'Answer with sources',k:'FastAPI, React',d:'Explains why a model failed and links the chunks it used, so a person can check it.'},
+      {id:'cont',c:4,r:2,t:'contract_draft',s:'dbt-contracts',h:'Contract proposal',k:'dbt-contracts',d:'In dbt-contracts the LLM proposes column types and constraints for a model as a draft contract.'},
+      {id:'test',c:5,r:1,t:'dbt_tests_ci',s:'GitHub Actions gate',h:'Tests decide, not the model',k:'dbt tests, GitHub Actions',d:'A generated contract only counts once dbt tests pass in CI. The LLM proposes; the tests decide.'},
+      {id:'hum',c:5,r:2,t:'human_review',s:'approve before apply',h:'Human approval',k:'Pull request review',d:'Nothing generated reaches main without a person approving it. Generated SQL can run and still be wrong.'}
+    ],
+    E:[['logs','chunk'],['docs','chunk'],['man','graph'],['chunk','emb'],['emb','vec'],['vec','ret'],['graph','ret'],['ret','llm'],['llm','ans'],['man','cont'],['llm','cont'],['cont','test'],['test','hum']]
+  });
+
+  /* the SCA platform */
+  graph({svg:'dag',ids:['d-title','d-tech','d-text'],start:'stg',rows:4,
+    cols:['SOURCES','INGESTION','BRONZE','SILVER, DBT','GOLD, DBT','USED BY'],
+    N:[
+
     {id:'wms',c:0,r:0,t:'warehouse_system',s:'WMS on SQL Server',ext:1,h:'Warehouse management system',k:'SQL Server',d:'Orders, stock movements and shipments from the warehouse system. The largest single source.'},
     {id:'car',c:0,r:1,t:'carriers',s:'DHL and DPD',ext:1,h:'Carrier feeds',k:'Files, Excel, CSV',d:'Shipment events and invoices from DHL and DPD, the messiest and highest-volume input.'},
     {id:'shop',c:0,r:2,t:'client_shops',s:'Shopify, xentral, more',ext:1,h:'Client shops',k:'REST/JSON, EDIFACT, SFTP',d:'Orders from fulfilment clients in their own formats: two JSON formats, EDIFACT ORDERS (D01B) and SFTP drops.'},
@@ -504,75 +632,10 @@ svg#dag{display:block;width:100%;height:auto}
     {id:'rec',c:5,r:1,t:'invoice_check',s:'used by finance',h:'Invoice reconciliation app',k:'Python, FastAPI, Docker',d:'Finance disputes carrier overcharges from here. It replaced about 1,280 lines of legacy SQL.'},
     {id:'api',c:5,r:2,t:'client_feedback',s:'stock + tracking out',h:'Data back to clients',k:'SFTP, REST',d:'Stock levels and tracking numbers sent back to each client shop automatically.'},
     {id:'app',c:5,r:3,t:'archive_app',s:'FastAPI + React',h:'Archive explorer',k:'FastAPI, React, DuckDB',d:'A small web app so the business can query years of history on its own.'}
-  ];
-  var E=[['wms','adf'],['car','py'],['shop','int'],['arc','pq'],['adf','brz'],['py','brz'],['int','brz'],['pq','duck'],
-         ['brz','stg'],['stg','fs'],['stg','fi'],['stg','dim'],['fs','bi'],['fi','bi'],['dim','bi'],['fi','rec'],['dim','api'],['int','api'],['duck','app']];
-  var byId={};N.forEach(function(n){byId[n.id]=n;});
-  var svg=document.getElementById('dag'), current='stg', gP, nw, nh;
-
-  function layout(){
-    var w=svg.parentNode.clientWidth, vertical=w<760, W, H;
-    while(svg.firstChild)svg.removeChild(svg.firstChild);
-    if(!vertical){
-      nw=156;nh=48;W=1140;H=356;var left=18,gx=(W-left*2-nw)/5,top=44,gy=74;
-      N.forEach(function(n){n.x=left+n.c*gx;n.y=top+n.r*gy;});
-      cols.forEach(function(c,i){el('text',{x:left+i*gx,y:26,'class':'colhead'},svg).textContent=c;});
-    } else {
-      nw=146;nh=48;W=330;var y=34,groups={};
-      N.forEach(function(n){(groups[n.c]=groups[n.c]||[]).push(n);});
-      Object.keys(groups).forEach(function(c){
-        el('text',{x:12,y:y-10,'class':'colhead'},svg).textContent=cols[c];
-        groups[c].forEach(function(n,i){n.x=12+(i%2)*(nw+14);n.y=y+Math.floor(i/2)*60;});
-        y+=Math.ceil(groups[c].length/2)*60+40;
-      });
-      H=y-12;
-    }
-    svg.setAttribute('viewBox','0 0 '+W+' '+H);
-    var gE=el('g',{},svg), gN=el('g',{},svg); gP=el('g',{},svg);
-    E.forEach(function(e){
-      var a=byId[e[0]],b=byId[e[1]],d,x1,y1,x2,y2,m;
-      if(!vertical){x1=a.x+nw;y1=a.y+nh/2;x2=b.x;y2=b.y+nh/2;m=(x1+x2)/2;d='M'+x1+','+y1+' C'+m+','+y1+' '+m+','+y2+' '+x2+','+y2;}
-      else{x1=a.x+nw/2;y1=a.y+nh;x2=b.x+nw/2;y2=b.y;m=(y1+y2)/2;d='M'+x1+','+y1+' C'+x1+','+m+' '+x2+','+m+' '+x2+','+y2;}
-      e.p=el('path',{d:d,'class':'edge'},gE);
-    });
-    N.forEach(function(n){
-      var g=el('g',{'class':'node'+(n.ext?' ext':''),transform:'translate('+n.x+','+n.y+')',tabindex:0,role:'button','aria-label':n.h},gN);
-      el('rect',{'class':'box',width:nw,height:nh},g);
-      el('text',{x:10,y:20,'class':'t'},g).textContent=n.t;
-      el('text',{x:10,y:37,'class':'s'},g).textContent=n.s;
-      n.g=g;
-      g.addEventListener('click',function(){select(n.id,true);});
-      g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(n.id,true);}});
-    });
-    select(current,false);
-  }
-  function related(id){
-    var all={};all[id]=1;
-    (function up(x){E.forEach(function(e){if(e[1]===x&&!all[e[0]]){all[e[0]]=1;up(e[0]);}});})(id);
-    (function dn(x){E.forEach(function(e){if(e[0]===x&&!all[e[1]]){all[e[1]]=1;dn(e[1]);}});})(id);
-    return all;
-  }
-  function select(id,animate){
-    current=id;var n=byId[id],rel=related(id);
-    N.forEach(function(m){m.g.classList.toggle('sel',m.id===id);m.g.classList.toggle('dim',!rel[m.id]);});
-    var path=E.filter(function(e){var on=rel[e[0]]&&rel[e[1]];e.p.classList.toggle('on',on);return on;});
-    document.getElementById('d-title').textContent=n.h;
-    document.getElementById('d-tech').textContent=n.k;
-    document.getElementById('d-text').textContent=n.d;
-    if(animate&&!reduce)flow(path);
-  }
-  function flow(edges){
-    while(gP.firstChild)gP.removeChild(gP.firstChild);
-    edges.forEach(function(e,i){
-      var r=el('rect',{width:9,height:7,'class':'pkt',opacity:0},gP), p=e.p, len=p.getTotalLength(), start=performance.now()+byId[e[0]].c*260, dur=700;
-      (function step(now){var t=(now-start)/dur;
-        if(t<0){return requestAnimationFrame(step);} if(t>1){r.remove();return;}
-        var pt=p.getPointAtLength(t*len);r.setAttribute('x',pt.x-4.5);r.setAttribute('y',pt.y-3.5);r.setAttribute('opacity',1);requestAnimationFrame(step);
-      })(performance.now());
-    });
-  }
-  layout();
-  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150);});
+    ],
+    E:[['wms','adf'],['car','py'],['shop','int'],['arc','pq'],['adf','brz'],['py','brz'],['int','brz'],['pq','duck'],
+         ['brz','stg'],['stg','fs'],['stg','fi'],['stg','dim'],['fs','bi'],['fi','bi'],['dim','bi'],['fi','rec'],['dim','api'],['int','api'],['duck','app']]
+  });
 })();
 </script>
 </body>
