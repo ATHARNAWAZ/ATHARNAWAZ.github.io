@@ -102,6 +102,55 @@ body::before{content:"";position:fixed;left:0;top:0;bottom:0;width:6px;backgroun
 .stamp.on{animation:stamp .35s ease-out 2.15s both}
 @keyframes stamp{0%{opacity:0;transform:rotate(-9deg) scale(1.6)}100%{opacity:.95;transform:rotate(-9deg) scale(1)}}
 
+
+/* ---------- hero v5: headline + diagnosis console ---------- */
+.hero{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:start;padding-top:28px}
+.hero .who{margin:0 0 18px;font:600 15px var(--wide);font-variation-settings:"wdth" 110;color:var(--ink-2)}
+.hero h1{font-size:clamp(40px,5.4vw,78px);line-height:.94;letter-spacing:-.03em;font-variation-settings:"wdth" 118}
+.hero .why{color:var(--ink);opacity:.82;margin-top:24px;max-width:56ch}
+.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:36px 0 0;border-top:2px solid var(--ink)}
+.proof > div{padding:14px 14px 0 0}
+.proof > div + div{padding-left:14px;border-left:1px solid var(--rule)}
+.proof dt{font:900 34px/1 var(--wide);font-variation-settings:"wdth" 125;letter-spacing:-.02em}
+.proof dd{margin:6px 0 0;color:var(--ink-2);font-size:14px;line-height:1.35}
+@media (max-width:980px){.hero{grid-template-columns:1fr}}
+
+.console{background:#101316;color:#e8ecef;border:2px solid var(--ink);box-shadow:var(--shadow);border-radius:4px;overflow:hidden;font-size:15px}
+:root[data-theme="dark"] .console{border-color:#3a4148}
+.con-top{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #2a3036;color:#9aa3ab}
+.con-top .mono{flex:1;font-size:11.5px}
+.dots i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#3a4148;margin-right:5px}
+.replay{font:600 12px var(--wide);background:transparent;color:#e8ecef;border:1px solid #3a4148;border-radius:999px;padding:3px 11px;cursor:pointer}
+.replay:hover{border-color:var(--tape);color:var(--tape)}
+.steps{list-style:none;margin:0;padding:6px 0}
+.steps > li{padding:12px 16px;border-left:3px solid transparent;opacity:.18;transition:opacity .35s ease,border-color .35s ease}
+.steps > li.on{opacity:1;border-left-color:#3a4148}
+.steps > li.cur{border-left-color:var(--tape)}
+.steps p{margin:6px 0 0}
+.st{display:flex;justify-content:space-between;align-items:center}
+.tag{font:700 11px var(--mono);color:var(--tape)}
+.tm{font-size:10.5px;color:#6f7880}
+.steps b{color:#fff;font-weight:600;font-family:var(--mono);font-size:13px}
+.path{font-size:12px;color:#c4cacf;word-break:break-word}
+.path mark{background:var(--tape);color:#111;padding:0 3px}
+.sub{color:#9aa3ab;font-size:14px}
+.spark{margin-top:8px}
+.spark svg{display:block;width:100%;height:44px}
+.spark .band{fill:rgba(255,210,31,.10);stroke:none}
+.spark .ln{fill:none;stroke:#c4cacf;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.spark .hit{fill:#ff5a4f}
+.hits{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px;font-size:14px;color:#c4cacf}
+.hits .mono{display:inline-block;width:40px;color:var(--tape);font-size:11.5px}
+.answer{color:#fff;min-height:3.2em}
+.answer cite{font-style:normal;color:var(--tape);font-family:var(--mono);font-size:11.5px}
+.gate{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.gate span{font-size:11px;padding:2px 8px;border:1px solid #3a4148}
+.gate .ok{color:#5fd39a;border-color:#2f6b4c}
+.gate .wait{color:var(--tape);border-color:#6b5a14}
+.con-foot{margin:0;padding:10px 16px 12px;border-top:1px solid #2a3036;font-size:12.5px;color:#9aa3ab}
+.con-foot a{color:#9ec0ff}
+@media (prefers-reduced-motion: reduce){.steps > li{opacity:1;transition:none}}
+
 /* ---------- section headings ---------- */
 section{position:relative;z-index:1;margin-top:120px}
 .sh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:34px}
@@ -248,7 +297,7 @@ svg#dag{display:block;width:100%;height:auto}
   <div class="bar">
     <a class="id" href="#top">Ather Nawaz</a>
     <nav aria-label="Sections">
-      <a class="opt" href="#ai">AI</a>
+      <a class="opt" href="#ai">How it works</a>
       <a class="opt" href="#platform">Platform</a>
       <a class="opt" href="#results">Results</a>
       <a class="opt" href="#route">Experience</a>
@@ -260,41 +309,56 @@ svg#dag{display:block;width:100%;height:auto}
 
   <header class="hero" id="top">
     <div>
-      <h1><span>Ather</span><span>Nawaz</span></h1>
-      <p class="pitch">AI Data Engineer. I build the data an LLM can actually be trusted with.</p>
-      <p class="why">Seven years running a production data platform at SCA Logistics &amp; Fulfilment, 300,000 records a day, built from nothing. Alongside it I build retrieval, embedding and guardrail pipelines for LLM tools. Most AI problems I've seen turned out to be data problems.</p>
+      <p class="who">Ather Nawaz · AI Data Engineer</p>
+      <h1>Data systems that catch their own failures and explain them.</h1>
+      <p class="why">I build predictive monitoring and LLM-based root-cause diagnosis for data pipelines: anomaly detection spots the problem, lineage and retrieval find the cause, an LLM explains it with sources, and tests plus a human decide the fix. Underneath it all, seven years running a production platform that moves 300,000 records a day.</p>
       <div class="cta">
-        <a class="btn primary" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
-        <a class="btn" href="#ai">See the AI pipeline</a>
+        <a class="btn primary" href="#doctor-replay" id="replay-cta">Watch a diagnosis</a>
+        <a class="btn" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
       </div>
+      <dl class="proof">
+        <div><dt>7 yrs</dt><dd>owning a production data platform</dd></div>
+        <div><dt>0</dt><dd>silent pipeline failures since 2022</dd></div>
+        <div><dt>+15%</dt><dd>fulfilment accuracy from anomaly detection</dd></div>
+      </dl>
     </div>
 
-    <div class="parcel" aria-label="Shipping label summarising availability">
-      <div class="label">
-        <div class="scan" id="scan"></div>
-        <div class="row">
-          <div class="cell"><span class="k">FROM</span><span class="v">Ather Nawaz<br>Ingolstadt, DE</span></div>
-          <div class="cell"><span class="k">TO</span><span class="v">Your data team<br>Munich, remote or relocation</span></div>
-        </div>
-        <div class="row">
-          <div class="cell full svc"><div><span class="k">SERVICE</span><span class="v">AI / Senior Data Engineer, permanent</span></div><span class="big">DE</span></div>
-        </div>
-        <div class="row">
-          <div class="cell"><span class="k">CONTENTS</span><span class="v">RAG, pgvector, dbt, Databricks, PySpark</span></div>
-          <div class="cell"><span class="k">IN SERVICE</span><span class="big">7 yrs</span></div>
-        </div>
-        <div class="row">
-          <div class="cell"><span class="k">LANGUAGES</span><span class="v">English C2, German B1</span></div>
-          <div class="cell"><span class="k">AVAILABLE FROM</span><span class="v">1 January 2027</span></div>
-        </div>
-        <div class="row">
-          <div class="cell full code">
-            <svg id="barcode" viewBox="0 0 400 64" preserveAspectRatio="none" aria-hidden="true"></svg>
-            <div class="num"><span>AN 2019 SCA 300K</span><span>atharnawaz@live.com</span></div>
-          </div>
-        </div>
-        <div class="stamp" id="stamp">AVAILABLE</div>
+    <div class="console" id="doctor-replay" aria-label="Replay of an automated pipeline diagnosis">
+      <div class="con-top">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="mono">pipeline-doctor · sample incident replay</span>
+        <button class="replay" id="replay" type="button">Replay</button>
       </div>
+      <ol class="steps" id="steps">
+        <li data-k="detect">
+          <div class="st"><span class="tag">01 detect</span><span class="tm mono">02:31</span></div>
+          <p><b>fct_shipments</b> loaded 38% fewer rows than its 14-day forecast band.</p>
+          <div class="spark" aria-hidden="true"><svg viewBox="0 0 300 54" preserveAspectRatio="none"><path class="band" d="M0,14 L300,14 L300,30 L0,30 Z"/><polyline class="ln" points="0,22 25,20 50,23 75,21 100,19 125,22 150,20 175,23 200,21 225,20 250,22 275,24 300,44"/><circle class="hit" cx="300" cy="44" r="4"/></svg></div>
+        </li>
+        <li data-k="trace">
+          <div class="st"><span class="tag">02 trace lineage</span><span class="tm mono">02:31</span></div>
+          <p class="mono path">fct_shipments ← stg_carrier_events ← bronze.dhl_events ← <mark>dhl_loader</mark></p>
+          <p class="sub">Only one upstream changed: last DHL load wrote 0 of 41,208 rows.</p>
+        </li>
+        <li data-k="retrieve">
+          <div class="st"><span class="tag">03 retrieve</span><span class="tm mono">02:32</span></div>
+          <ul class="hits">
+            <li><span class="mono">0.91</span> runbook: carrier file schema changed</li>
+            <li><span class="mono">0.84</span> incident: DHL header row moved</li>
+            <li><span class="mono">0.62</span> loader log: column count 23 ≠ 24</li>
+          </ul>
+        </li>
+        <li data-k="diagnose">
+          <div class="st"><span class="tag">04 diagnose</span><span class="tm mono">02:32</span></div>
+          <p class="answer" id="answer"></p>
+        </li>
+        <li data-k="fix">
+          <div class="st"><span class="tag">05 propose fix</span><span class="tm mono">02:33</span></div>
+          <p>Draft PR: map the new column, add a schema contract test on <b>bronze.dhl_events</b>.</p>
+          <p class="gate"><span class="ok mono">dbt tests: pass</span><span class="wait mono">waiting for human approval</span></p>
+        </li>
+      </ol>
+      <p class="con-foot">A scripted replay of how my open-source Pipeline Doctor works, on a sample failure. <a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code on GitHub</a></p>
     </div>
   </header>
 </div>
@@ -302,7 +366,7 @@ svg#dag{display:block;width:100%;height:auto}
 <div class="wrap">
   <section id="ai">
     <div class="sh">
-      <h2>The data layer an LLM depends on</h2>
+      <h2>Inside the diagnosis engine</h2>
       <p>How my AI tools are wired, from Pipeline Doctor and dbt-contracts. Built in my own projects, not at SCA. Select a box to see the decision behind it.</p>
     </div>
     <div class="board">
@@ -346,8 +410,8 @@ svg#dag{display:block;width:100%;height:auto}
 
   <section id="results">
     <div class="sh">
-      <h2>What changed because of it</h2>
-      <p>Production numbers from SCA. Each one started as a problem somebody brought to me, not as a technology I wanted to try.</p>
+      <h2>Already working in production</h2>
+      <p>Detection, prediction and automation I run at SCA today. Each one started as a problem somebody brought to me.</p>
     </div>
     <div class="manifest">
       <div class="line">
@@ -367,7 +431,7 @@ svg#dag{display:block;width:100%;height:auto}
         <div class="delta">79<small>billing rules made explicit</small></div>
       </div>
       <div class="line">
-        <div><h3>Shipping profitability</h3><p class="how">A model joining orders, carrier costs and client pricing showed which orders and carrier setups were losing money.</p></div>
+        <div><h3>Profitability forecasting</h3><p class="how">Regression and trend models on orders, carrier costs and client pricing showed which orders and carrier setups were losing money.</p></div>
         <div class="bars" aria-hidden="true">
           <div class="bar-row"><span>margin</span><div class="track"><div class="fill after" style="width:12%"></div></div></div>
         </div>
@@ -382,7 +446,7 @@ svg#dag{display:block;width:100%;height:auto}
         <div class="delta">0<small>silent failures since 2022</small></div>
       </div>
       <div class="line">
-        <div><h3>Fulfilment accuracy and returns</h3><p class="how">Anomaly detection on unprocessed orders, and an analysis of what drives returns.</p></div>
+        <div><h3>Predictive anomaly detection</h3><p class="how">Statistical anomaly detection flags orders that won't ship before customers notice; a return-driver analysis shows what to fix upstream.</p></div>
         <div class="bars" aria-hidden="true">
           <div class="bar-row"><span>accuracy</span><div class="track"><div class="fill after" style="width:15%"></div></div></div>
           <div class="bar-row"><span>returns</span><div class="track"><div class="fill" style="width:8%"></div></div></div>
@@ -506,18 +570,25 @@ svg#dag{display:block;width:100%;height:auto}
   label();
   tbtn.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}label();});
 
-  /* barcode: deterministic bars from the tracking text */
+  /* the one orchestrated moment: a diagnosis replays step by step */
   (function(){
-    var svg=document.getElementById('barcode'), txt='AN2019SCA300K-ATHERNAWAZ', x=6, seed=0, i;
-    for(i=0;i<txt.length;i++)seed=(seed*31+txt.charCodeAt(i))>>>0;
-    function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
-    el('rect',{x:0,y:0,width:2.5,height:64,fill:'currentColor'},svg);el('rect',{x:4,y:0,width:1.2,height:64,fill:'currentColor'},svg);
-    while(x<392){var w=[1.2,1.2,2.4,3.6][Math.floor(rnd()*4)];el('rect',{x:x,y:0,width:w,height:64,fill:'currentColor'},svg);x+=w+[1.2,2.4,1.2,3.6][Math.floor(rnd()*4)];}
-    svg.style.color='var(--ink)';
+    var steps=[].slice.call(document.querySelectorAll('#steps > li')), ans=document.getElementById('answer'), timers=[];
+    var text='The DHL carrier file arrived with a new column inserted at position 9. The loader rejects rows on a column-count mismatch, so the whole file was skipped and nothing failed loudly. ';
+    var cites='[runbook 1] [loader log 3]';
+    function clear(){timers.forEach(clearTimeout);timers=[];steps.forEach(function(li){li.classList.remove('on','cur');});ans.textContent='';}
+    function show(i){steps.forEach(function(li,j){li.classList.toggle('on',j<=i);li.classList.toggle('cur',j===i);});}
+    function typeAnswer(done){
+      var i=0;(function tick(){ans.textContent=text.slice(0,i);i+=3;if(i<=text.length+3){timers.push(setTimeout(tick,16));}else{var c=document.createElement('cite');c.textContent=cites;ans.appendChild(c);done&&done();}})();
+    }
+    function run(){
+      clear();
+      if(reduce){show(steps.length-1);ans.textContent=text;var c=document.createElement('cite');c.textContent=cites;ans.appendChild(c);return;}
+      var t=300;[0,1,2,3].forEach(function(i){timers.push(setTimeout(function(){show(i);if(i===3)typeAnswer(function(){timers.push(setTimeout(function(){show(4);},500));});},t));t+=1100;});
+    }
+    document.getElementById('replay').addEventListener('click',run);
+    document.getElementById('replay-cta').addEventListener('click',function(){setTimeout(run,250);});
+    run();
   })();
-  /* the one orchestrated moment: the label gets scanned on load */
-  if(!reduce){document.getElementById('scan').classList.add('run');}
-  document.getElementById('stamp').classList.add('on');
 
   /* reusable lineage graph */
   function graph(cfg){
