@@ -499,24 +499,24 @@ svg#dag{display:block;width:100%;height:auto}
     </div>
     <div class="shelf">
       <article class="box wide">
-        <header><span>RAG</span><span>AWS Lambda</span></header>
-        <div class="in"><h3>Pipeline Doctor</h3><p>Upload dbt artifacts, ask why a model failed, and get the root cause, the offending SQL line and the blocked downstream models in plain English.</p><div class="stack">fastapi / networkx / llamaindex / pgvector / llm api / lambda / slack</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
+        <header><span>LLM + RAG diagnosis</span><span>AWS Lambda, Slack</span></header>
+        <div class="in"><h3>Pipeline Doctor</h3><p>Reads a failed dbt run, traces the lineage, retrieves the relevant SQL with RAG and explains the root cause, the offending line and the blocked downstream models in plain English.</p><div class="stack">fastapi / networkx / llamaindex / pgvector / llm api / react</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box wide">
+        <header><span>Real-time streaming</span><span>make demo</span></header>
+        <div class="in"><h3>Meridian</h3><p>Real-time e-commerce analytics with event-time watermarks, late-event handling, exactly-once writes to Iceberg and Flink CEP fraud detection (three orders over €500 in ten minutes). Monitored in Grafana.</p><div class="stack">kafka + avro / flink / iceberg / dbt / duckdb / prometheus / 30 tests</div><div class="go"><a href="https://github.com/ATHARNAWAZ/meridian" target="_blank" rel="noopener">View code</a></div></div>
+      </article>
+      <article class="box">
+        <header><span>Data quality library</span><span>82 tests</span></header>
+        <div class="in"><h3>quarantine-dq</h3><p>Bad records are quarantined with their failure reason instead of crashing the pipeline or vanishing, then replayed after the fix.</p><div class="stack">pandas / spark / airflow / dbt adapters / optional llm</div><div class="go"><a href="https://github.com/ATHARNAWAZ/quarantine-dq" target="_blank" rel="noopener">View code</a></div></div>
+      </article>
+      <article class="box">
         <header><span>LLM + data contracts</span><span class="livetag">Live web app</span></header>
-        <div class="in"><h3>dbt-contracts</h3><p>Web app that generates and enforces data contracts for dbt models with an LLM, wired into GitHub Actions.</p><div class="stack">llm apis / dbt / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
+        <div class="in"><h3>dbt-contracts</h3><p>Generates data contracts for every dbt model with an LLM and enforces them on each pull request through a GitHub Action.</p><div class="stack">llm api / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box">
-        <header><span>LLM + lineage</span><span>Web app</span></header>
-        <div class="in"><h3>dbt Lineage Explorer</h3><p>Interactive lineage graph for any dbt project, with LLM-written explanations of models and their dependencies.</p><div class="stack">networkx / react flow / llm apis</div><div class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
-      </article>
-      <article class="box">
-        <header><span>Lakehouse</span><span>Azure Databricks</span></header>
-        <div class="in"><h3>BookWorm Data Platform</h3><p>Medallion lakehouse over 2.36 million books and 15.7 million reviews: the kind of clean text corpus retrieval needs.</p><div class="stack">databricks / delta / dbt, 43 tests / unity catalog</div><div class="go"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">View code</a></div></div>
-      </article>
-      <article class="box">
-        <header><span>Lakehouse</span><span>Open source stack</span></header>
-        <div class="in"><h3>Zero-Copy Lakehouse</h3><p>DuckDB, Iceberg and dbt as a low-cost lakehouse, with time travel and a cost comparison against a cloud warehouse.</p><div class="stack">duckdb / iceberg / dbt</div><div class="go"><a href="https://github.com/ATHARNAWAZ/zero-copy-lakehouse" target="_blank" rel="noopener">View code</a></div></div>
+        <header><span>LLM + lineage</span><span class="livetag">Live web app</span></header>
+        <div class="in"><h3>dbt Lineage Explorer</h3><p>Interactive DAG with column-level lineage and an AI impact analysis of what breaks downstream before you ship.</p><div class="stack">networkx / react flow / llm api</div><div class="go"><a href="https://dbt-lineage-explorer.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
       </article>
     </div>
   </section>
@@ -532,7 +532,7 @@ svg#dag{display:block;width:100%;height:auto}
       <div><h3>AI, in my own projects</h3><p class="note">Built, deployed and documented on GitHub</p>
         <div class="chips"><span class="chip">RAG pipelines</span><span class="chip">pgvector</span><span class="chip">Chroma</span><span class="chip">Pinecone</span><span class="chip">LlamaIndex</span><span class="chip">LangChain</span><span class="chip">sentence-transformers</span><span class="chip">Embeddings</span><span class="chip">LLM APIs: OpenAI, Anthropic</span><span class="chip">MCP</span><span class="chip">MLflow</span></div>
         <h3 style="margin-top:22px">Data, in my own projects</h3>
-        <div class="chips" style="margin-top:10px"><span class="chip">Apache Iceberg</span><span class="chip">DuckDB</span><span class="chip">Airflow</span><span class="chip">Dagster</span><span class="chip">Snowflake</span><span class="chip">AWS S3, Glue, Athena, Lambda</span><span class="chip">Kafka</span><span class="chip">Terraform</span></div></div>
+        <div class="chips" style="margin-top:10px"><span class="chip">Kafka + Avro</span><span class="chip">Apache Flink</span><span class="chip">Apache Iceberg</span><span class="chip">DuckDB</span><span class="chip">Airflow</span><span class="chip">Dagster</span><span class="chip">Snowflake</span><span class="chip">AWS S3, Glue, Athena, Lambda</span><span class="chip">Prometheus, Grafana</span><span class="chip">Terraform</span></div></div>
     </div>
     <div class="facts">
       <div><span class="k">EDUCATION</span><div class="v">BSc Computer Science, Iqra University</div></div>
