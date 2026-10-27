@@ -311,7 +311,7 @@ svg#dag{display:block;width:100%;height:auto}
     <div>
       <p class="who">Ather Nawaz · AI Data Engineer</p>
       <h1>Data systems that catch their own failures and explain them.</h1>
-      <p class="why">I build predictive monitoring and LLM-based root-cause diagnosis for data pipelines: anomaly detection spots the problem, lineage and retrieval find the cause, an LLM explains it with sources, and tests plus a human decide the fix. Underneath it all, seven years running a production platform that moves 300,000 records a day.</p>
+      <p class="why">In production at SCA I run statistical anomaly detection and alerting that catch problems before anyone opens a report. On my own time I built Pipeline Doctor: it reads a failed dbt run, traces the lineage, retrieves the right SQL with RAG and has an LLM explain the root cause in plain English. Underneath both, seven years owning a platform that moves 300,000 records a day.</p>
       <div class="cta">
         <a class="btn primary" href="#doctor-replay" id="replay-cta">Watch a diagnosis</a>
         <a class="btn" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
@@ -326,39 +326,39 @@ svg#dag{display:block;width:100%;height:auto}
     <div class="console" id="doctor-replay" aria-label="Replay of an automated pipeline diagnosis">
       <div class="con-top">
         <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="mono">pipeline-doctor · sample incident replay</span>
+        <span class="mono">pipeline-doctor · replay on sample_data/</span>
         <button class="replay" id="replay" type="button">Replay</button>
       </div>
       <ol class="steps" id="steps">
-        <li data-k="detect">
-          <div class="st"><span class="tag">01 detect</span><span class="tm mono">02:31</span></div>
-          <p><b>fct_shipments</b> loaded 38% fewer rows than its 14-day forecast band.</p>
-          <div class="spark" aria-hidden="true"><svg viewBox="0 0 300 54" preserveAspectRatio="none"><path class="band" d="M0,14 L300,14 L300,30 L0,30 Z"/><polyline class="ln" points="0,22 25,20 50,23 75,21 100,19 125,22 150,20 175,23 200,21 225,20 250,22 275,24 300,44"/><circle class="hit" cx="300" cy="44" r="4"/></svg></div>
+        <li>
+          <div class="st"><span class="tag">01 detect</span><span class="tm mono">02:14</span></div>
+          <p><b>dbt build</b>: 2 of 12 models failed. Lambda posts the failure to Slack.</p>
+          <p class="mono path">ERROR mart_revenue_summary · column "product_category" does not exist · LINE 9</p>
         </li>
-        <li data-k="trace">
-          <div class="st"><span class="tag">02 trace lineage</span><span class="tm mono">02:31</span></div>
-          <p class="mono path">fct_shipments ← stg_carrier_events ← bronze.dhl_events ← <mark>dhl_loader</mark></p>
-          <p class="sub">Only one upstream changed: last DHL load wrote 0 of 41,208 rows.</p>
+        <li>
+          <div class="st"><span class="tag">02 trace lineage</span><span class="tm mono">02:14</span></div>
+          <p class="mono path">mart_revenue_summary ← <mark>int_product_revenue</mark> ← stg_products, stg_transactions</p>
+          <p class="sub">Every upstream model passed, so the cause is inside the mart itself.</p>
         </li>
-        <li data-k="retrieve">
-          <div class="st"><span class="tag">03 retrieve</span><span class="tm mono">02:32</span></div>
+        <li>
+          <div class="st"><span class="tag">03 retrieve</span><span class="tm mono">02:14</span></div>
           <ul class="hits">
-            <li><span class="mono">0.91</span> runbook: carrier file schema changed</li>
-            <li><span class="mono">0.84</span> incident: DHL header row moved</li>
-            <li><span class="mono">0.62</span> loader log: column count 23 ≠ 24</li>
+            <li><span class="mono">sql</span> mart_revenue_summary.sql, line 9</li>
+            <li><span class="mono">cols</span> int_product_revenue: product_id, product_type, …</li>
+            <li><span class="mono">cols</span> stg_products: product_name, product_type, product_tier</li>
           </ul>
         </li>
-        <li data-k="diagnose">
-          <div class="st"><span class="tag">04 diagnose</span><span class="tm mono">02:32</span></div>
+        <li>
+          <div class="st"><span class="tag">04 diagnose</span><span class="tm mono">02:14</span></div>
           <p class="answer" id="answer"></p>
         </li>
-        <li data-k="fix">
-          <div class="st"><span class="tag">05 propose fix</span><span class="tm mono">02:33</span></div>
-          <p>Draft PR: map the new column, add a schema contract test on <b>bronze.dhl_events</b>.</p>
-          <p class="gate"><span class="ok mono">dbt tests: pass</span><span class="wait mono">waiting for human approval</span></p>
+        <li>
+          <div class="st"><span class="tag">05 suggest fix</span><span class="tm mono">02:15</span></div>
+          <p>Select <b>product_type AS product_category</b> on line 9, then <b>dbt build -s mart_revenue_summary</b>.</p>
+          <p class="gate"><span class="ok mono">no upstream changes needed</span><span class="wait mono">a person applies the fix</span></p>
         </li>
       </ol>
-      <p class="con-foot">A scripted replay of how my open-source Pipeline Doctor works, on a sample failure. <a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code on GitHub</a></p>
+      <p class="con-foot">A scripted replay of my open-source Pipeline Doctor on the sample dbt project that ships with it. <a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code on GitHub</a></p>
     </div>
   </header>
 </div>
@@ -367,11 +367,11 @@ svg#dag{display:block;width:100%;height:auto}
   <section id="ai">
     <div class="sh">
       <h2>Inside the diagnosis engine</h2>
-      <p>How my AI tools are wired, from Pipeline Doctor and dbt-contracts. Built in my own projects, not at SCA. Select a box to see the decision behind it.</p>
+      <p>How Pipeline Doctor is built, component by component. My own open-source project, not an SCA system. Select a box to see what it does and why.</p>
     </div>
     <div class="board">
       <div class="board-top">
-        <strong>Retrieval, generation and guardrails</strong>
+        <strong>Pipeline Doctor: from failed run to explanation</strong>
         <div class="legend"><span><i class="ext"></i>Input</span><span><i></i>Built by me</span><span><i class="hot"></i>Selected</span></div>
       </div>
       <svg id="aidag" role="img" aria-label="Pipeline graph of the AI tools"></svg>
@@ -382,10 +382,10 @@ svg#dag{display:block;width:100%;height:auto}
       </div>
     </div>
     <div class="lessons">
-      <div><h3>Retrieval beats the model</h3><p>Swapping models changed little. Filtering by metadata before ranking, and passing real lineage, changed answers a lot.</p></div>
-      <div><h3>The LLM proposes, tests decide</h3><p>Generated contracts and SQL only count after dbt tests pass in CI. Code that runs can still be wrong.</p></div>
-      <div><h3>Ground it in metadata</h3><p>Hallucinated column names stopped once the prompt held only what the dbt manifest actually contains.</p></div>
-      <div><h3>AI in my daily work</h3><p>I use coding agents with MCP servers every day for models, tests and docs, and review every change myself.</p></div>
+      <div><h3>Context, not fine-tuning</h3><p>A focused system prompt and carefully assembled context: the failing SQL, its columns, the error and the real lineage.</p></div>
+      <div><h3>Lineage before language</h3><p>The dependency graph comes from the manifest, so the model reasons over actual upstream and downstream models.</p></div>
+      <div><h3>Runs without paid embeddings</h3><p>OpenAI embeddings when a key is present, a small local model on CPU when it isn't.</p></div>
+      <div><h3>Alerts where people are</h3><p>An optional S3, Lambda and Slack path posts failures and recoveries to the team channel.</p></div>
     </div>
   </section>
 
@@ -500,15 +500,15 @@ svg#dag{display:block;width:100%;height:auto}
     <div class="shelf">
       <article class="box wide">
         <header><span>RAG</span><span>AWS Lambda</span></header>
-        <div class="in"><h3>Pipeline Doctor</h3><p>Ask why a data pipeline failed and get an answer that cites the logs, runbooks and lineage it used. Metadata filtering before vector ranking made the difference.</p><div class="stack">llamaindex / pgvector / embeddings / llm apis / lambda</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
+        <div class="in"><h3>Pipeline Doctor</h3><p>Upload dbt artifacts, ask why a model failed, and get the root cause, the offending SQL line and the blocked downstream models in plain English.</p><div class="stack">fastapi / networkx / llamaindex / pgvector / llm api / lambda / slack</div><div class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box wide">
         <header><span>LLM + data contracts</span><span class="livetag">Live web app</span></header>
-        <div class="in"><h3>dbt-contracts</h3><p>An LLM drafts data contracts for dbt models; CI enforces them with dbt tests, and a person approves each one before it applies.</p><div class="stack">llm apis / dbt / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
+        <div class="in"><h3>dbt-contracts</h3><p>Web app that generates and enforces data contracts for dbt models with an LLM, wired into GitHub Actions.</p><div class="stack">llm apis / dbt / fastapi / react / github actions</div><div class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Open app</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box">
         <header><span>LLM + lineage</span><span>Web app</span></header>
-        <div class="in"><h3>dbt Lineage Explorer</h3><p>Lineage graph for any dbt project, with LLM-written notes on what a change would affect, grounded only in the manifest.</p><div class="stack">networkx / react flow / llm apis</div><div class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
+        <div class="in"><h3>dbt Lineage Explorer</h3><p>Interactive lineage graph for any dbt project, with LLM-written explanations of models and their dependencies.</p><div class="stack">networkx / react flow / llm apis</div><div class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">View code</a></div></div>
       </article>
       <article class="box">
         <header><span>Lakehouse</span><span>Azure Databricks</span></header>
@@ -573,8 +573,8 @@ svg#dag{display:block;width:100%;height:auto}
   /* the one orchestrated moment: a diagnosis replays step by step */
   (function(){
     var steps=[].slice.call(document.querySelectorAll('#steps > li')), ans=document.getElementById('answer'), timers=[];
-    var text='The DHL carrier file arrived with a new column inserted at position 9. The loader rejects rows on a column-count mismatch, so the whole file was skipped and nothing failed loudly. ';
-    var cites='[runbook 1] [loader log 3]';
+    var text='mart_revenue_summary asks for product_category, but its only parent, int_product_revenue, exposes that attribute as product_type. Nothing upstream broke; the mart references a column name that was never there. ';
+    var cites='[mart_revenue_summary.sql:9] [int_product_revenue columns]';
     function clear(){timers.forEach(clearTimeout);timers=[];steps.forEach(function(li){li.classList.remove('on','cur');});ans.textContent='';}
     function show(i){steps.forEach(function(li,j){li.classList.toggle('on',j<=i);li.classList.toggle('cur',j===i);});}
     function typeAnswer(done){
@@ -661,23 +661,22 @@ svg#dag{display:block;width:100%;height:auto}
 
   /* AI data layer, from my own projects */
   graph({svg:'aidag',ids:['a-title','a-tech','a-text'],start:'ret',rows:3,
-    cols:['SOURCES','PREPARE','INDEX','RETRIEVE','GENERATE','GUARDRAILS'],
+    cols:['INPUTS','PARSE','INDEX','RETRIEVE','DIAGNOSE','DELIVER'],
     N:[
-      {id:'logs',c:0,r:0,t:'run_logs',s:'dbt and pipeline errors',ext:1,h:'Pipeline run logs',k:'dbt run results, error output',d:'Failed runs and their error messages: the questions people actually ask an assistant.'},
-      {id:'man',c:0,r:1,t:'dbt_manifest',s:'models, columns, lineage',ext:1,h:'dbt manifest',k:'manifest.json, catalog.json',d:'The ground truth about models, columns and dependencies. Everything the LLM says gets checked against it.'},
-      {id:'docs',c:0,r:2,t:'runbooks',s:'docs and past fixes',ext:1,h:'Runbooks and docs',k:'Markdown, past incidents',d:'How earlier failures were fixed. Often more useful than the model\'s general knowledge.'},
-      {id:'chunk',c:1,r:0,t:'chunking',s:'per model, per error',h:'Chunking with metadata',k:'Python',d:'Split by model and by error, keeping model name, layer and timestamp as metadata so retrieval can filter instead of guess.'},
-      {id:'graph',c:1,r:1,t:'lineage_graph',s:'NetworkX from manifest',h:'Lineage graph',k:'NetworkX',d:'Upstream and downstream of every model, built from the manifest. Gives the LLM real impact information instead of letting it invent it.'},
-      {id:'emb',c:2,r:0,t:'embeddings',s:'sentence-transformers',h:'Embeddings',k:'sentence-transformers, embedding APIs',d:'Chunks turned into vectors. Re-embedded only when the source changes, not on every run.'},
-      {id:'vec',c:2,r:1,t:'pgvector',s:'vectors + metadata',h:'Vector store',k:'PostgreSQL with pgvector',d:'Vectors next to their metadata in Postgres, so a query can filter by model or layer before it ranks by similarity.'},
-      {id:'ret',c:3,r:1,t:'retriever',s:'filter, then rank',h:'Retrieval',k:'LlamaIndex, pgvector',d:'Metadata filter first, similarity second, plus the lineage of the failing model. The biggest lesson from Pipeline Doctor: answer quality followed retrieval quality, not model choice.'},
-      {id:'llm',c:4,r:1,t:'llm_call',s:'only retrieved context',h:'Generation',k:'LLM APIs (OpenAI, Anthropic), AWS Lambda',d:'The model only sees the retrieved context and is asked to cite it. Runs serverless on Lambda.'},
-      {id:'ans',c:4,r:0,t:'answer',s:'with sources',h:'Answer with sources',k:'FastAPI, React',d:'Explains why a model failed and links the chunks it used, so a person can check it.'},
-      {id:'cont',c:4,r:2,t:'contract_draft',s:'dbt-contracts',h:'Contract proposal',k:'dbt-contracts',d:'In dbt-contracts the LLM proposes column types and constraints for a model as a draft contract.'},
-      {id:'test',c:5,r:1,t:'dbt_tests_ci',s:'GitHub Actions gate',h:'Tests decide, not the model',k:'dbt tests, GitHub Actions',d:'A generated contract only counts once dbt tests pass in CI. The LLM proposes; the tests decide.'},
-      {id:'hum',c:5,r:2,t:'human_review',s:'approve before apply',h:'Human approval',k:'Pull request review',d:'Nothing generated reaches main without a person approving it. Generated SQL can run and still be wrong.'}
+      {id:'man',c:0,r:0,t:'manifest.json',s:'models, SQL, columns',ext:1,h:'dbt manifest',k:'dbt artifacts',d:'Every model with its SQL, columns and dependencies. The ground truth the diagnosis is built on.'},
+      {id:'rr',c:0,r:1,t:'run_results.json',s:'status, errors',ext:1,h:'dbt run results',k:'dbt artifacts',d:'Which models failed, with the database error and line number.'},
+      {id:'q',c:0,r:2,t:'question',s:'plain English',ext:1,h:'Your question',k:'Web UI or API',d:'For example: why did mart_revenue fail? Asked in the chat UI or via the REST API.'},
+      {id:'par',c:1,r:0,t:'manifest_parser',s:'+ run results',h:'Manifest parser',k:'Python, FastAPI',d:'Reads both artifacts and marks the failing nodes.'},
+      {id:'dag',c:1,r:1,t:'lineage_dag',s:'NetworkX',h:'Lineage DAG',k:'NetworkX',d:'The project as a graph, so the exact upstream and downstream of a failing model is known rather than guessed. Also rendered as a clickable DAG in the UI.'},
+      {id:'emb',c:2,r:0,t:'embeddings',s:'ada-002 or bge-small',h:'Embeddings',k:'OpenAI ada-002, or BAAI/bge-small-en-v1.5 on CPU',d:'Uses OpenAI embeddings when a key is set and a small local model otherwise, so it runs without paid embeddings.'},
+      {id:'vec',c:2,r:1,t:'pgvector',s:'model index',h:'Vector store',k:'PostgreSQL with pgvector',d:'Model embeddings in Postgres, so the index survives restarts and sits next to normal relational data.'},
+      {id:'ret',c:3,r:1,t:'retriever',s:'SQL + lineage context',h:'Context assembly',k:'LlamaIndex, pgvector',d:'Retrieves the relevant model SQL, columns, error and the upstream/downstream chain. The model reads this assembled context, not raw embeddings.'},
+      {id:'llm',c:4,r:1,t:'llm_diagnosis',s:'focused system prompt',h:'Diagnosis',k:'LLM API',d:'No fine-tuning: a focused system prompt plus good context. Returns the root cause, the offending SQL line and which downstream models are blocked.'},
+      {id:'ui',c:5,r:0,t:'web_ui',s:'chat + DAG',h:'Web app',k:'React, Vite',d:'Chat with your project and click through the lineage graph to see each model\'s SQL and run status.'},
+      {id:'api',c:5,r:1,t:'rest_api',s:'FastAPI',h:'API',k:'FastAPI',d:'The same diagnosis over HTTP, for scripts and CI.'},
+      {id:'sl',c:5,r:2,t:'slack_alert',s:'S3 → Lambda → Slack',h:'Alerts',k:'AWS S3, EventBridge, Lambda, Slack',d:'Optional AWS path: new artifacts in S3 trigger a Lambda that posts failures and recoveries to Slack.'}
     ],
-    E:[['logs','chunk'],['docs','chunk'],['man','graph'],['chunk','emb'],['emb','vec'],['vec','ret'],['graph','ret'],['ret','llm'],['llm','ans'],['man','cont'],['llm','cont'],['cont','test'],['test','hum']]
+    E:[['man','par'],['rr','par'],['par','dag'],['par','emb'],['emb','vec'],['vec','ret'],['dag','ret'],['q','ret'],['ret','llm'],['llm','ui'],['llm','api'],['rr','sl']]
   });
 
   /* the SCA platform */
