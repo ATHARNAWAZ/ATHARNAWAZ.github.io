@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ather Nawaz · Senior Data Engineer</title>
+<meta name="description" content="Ather Nawaz, Senior Data Engineer in Ingolstadt, Germany. dbt, Databricks, Python, SQL. Built a logistics company's data platform from scratch.">
+<meta name="author" content="Ather Nawaz">
+<meta property="og:title" content="Ather Nawaz · Senior Data Engineer">
+<meta property="og:description" content="Data platforms, dbt, Databricks and the reporting people rely on.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --ink:#18202b; --soft:#5a6675; --line:#e3e7ec;
+  --accent:#1f5f99; --accent-soft:#e6eef7; --chip:#eef2f6;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f141a; --surface:#161d26; --ink:#e7ecf2; --soft:#9aa7b6; --line:#263241;
+    --accent:#6fb0ee; --accent-soft:#1b2a3a; --chip:#1d2733;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --surface:#161d26; --ink:#e7ecf2; --soft:#9aa7b6; --line:#263241;
+  --accent:#6fb0ee; --accent-soft:#1b2a3a; --chip:#1d2733;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+nav .brand{font-family:var(--mono);font-weight:500;color:var(--ink)}
+nav .links{display:flex;gap:18px;align-items:center;font-size:14px}
+nav .links a{color:var(--soft)}
+nav .links a:hover{color:var(--ink);text-decoration:none}
+#theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 9px;cursor:pointer;font-size:13px}
+@media (max-width:640px){nav .links a.hide-sm{display:none}}
+
+header.hero{padding-top:72px;padding-bottom:40px}
+.kicker{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.02em}
+h1{font-size:clamp(34px,6vw,52px);line-height:1.1;margin:10px 0 14px;letter-spacing:-.02em}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--soft);max-width:680px;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.meta{margin-top:22px;font-size:14px;color:var(--soft);display:flex;flex-wrap:wrap;gap:6px 18px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{display:block;font-size:26px;letter-spacing:-.01em}
+.stat span{font-size:13px;color:var(--soft)}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+section{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--line);margin-top:40px}
+h2{font-size:14px;font-family:var(--mono);font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin:0 0 20px}
+.about p{max-width:720px;margin:0 0 14px}
+
+.job{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 0;border-bottom:1px dashed var(--line)}
+.job:last-child{border-bottom:0}
+.job .when{font-family:var(--mono);font-size:13px;color:var(--soft);padding-top:3px}
+.job h3{margin:0;font-size:18px}
+.job .org{color:var(--soft);font-size:15px;margin:2px 0 10px}
+.job ul{margin:0;padding-left:18px}
+.job li{margin:0 0 6px}
+@media (max-width:640px){.job{grid-template-columns:1fr;gap:4px}}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.card h3{margin:0;font-size:17px}
+.card p{margin:0;color:var(--soft);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:12px;background:var(--chip);border-radius:6px;padding:3px 8px;color:var(--ink)}
+.card .links{margin-top:auto;display:flex;gap:14px;font-size:14px;font-weight:500}
+
+.skills{display:grid;grid-template-columns:200px 1fr;gap:10px 20px}
+.skills dt{font-weight:600}
+.skills dd{margin:0;color:var(--soft)}
+@media (max-width:640px){.skills{grid-template-columns:1fr;gap:2px}.skills dd{margin-bottom:10px}}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.two h3{font-size:16px;margin:0 0 8px}
+.two p,.two li{color:var(--soft);margin:0 0 6px}
+.two ul{padding-left:18px;margin:0}
+
+.contact{background:var(--accent-soft);border-radius:16px;padding:28px}
+.contact h3{margin:0 0 6px;font-size:22px}
+.contact p{margin:0 0 18px;color:var(--soft)}
+footer{padding-top:28px;padding-bottom:40px;color:var(--soft);font-size:13px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">ather.nawaz</a>
+    <div class="links">
+      <a class="hide-sm" href="#experience">Experience</a>
+      <a class="hide-sm" href="#projects">Projects</a>
+      <a class="hide-sm" href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme" type="button" aria-label="Toggle colour theme">Theme</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero wrap">
+    <div class="kicker">Senior Data Engineer · Ingolstadt, Germany</div>
+    <h1>Ather Nawaz</h1>
+    <p class="lead">I build data platforms that people actually rely on. Since 2019 I've designed and run the entire data platform of an e-commerce fulfilment company, from the first pipeline to today's Databricks lakehouse with dbt.</p>
+    <div class="cta">
+      <a class="btn primary" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
+      <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/ATHARNAWAZ" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="meta">
+      <span>Open to permanent roles: Munich, remote or relocation</span>
+      <span>English C2 · German B1 (telc)</span>
+      <span>German citizen</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>7 yrs</b><span>owning a production data platform</span></div>
+      <div class="stat"><b>300k+</b><span>records ingested per day</span></div>
+      <div class="stat"><b>−80%</b><span>reporting time for 12 analysts</span></div>
+      <div class="stat"><b>+10–12%</b><span>shipping margin from one model</span></div>
+    </div>
+  </div>
+
+  <section class="wrap about" id="about">
+    <h2>About</h2>
+    <p>I joined SCA Logistics &amp; Fulfilment in 2019 as the first person doing IT and data. There was no platform, just exports from shop systems, carriers and the warehouse glued together by hand. I built the ingestion, then the models, then the reporting, and I still own all of it.</p>
+    <p>What I enjoy most is the step before writing SQL: sitting with operations or finance until a vague question becomes a clear definition. Then I build it so it's tested, documented and boring to run.</p>
+  </section>
+
+  <section class="wrap" id="experience">
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="when">Aug 2019 – present</div>
+      <div>
+        <h3>Senior Software Engineer (Data Engineering)</h3>
+        <div class="org">SCA Logistics &amp; Fulfilment GmbH · Ingolstadt</div>
+        <ul>
+          <li>Designed and built the company's data platform from scratch: Azure Data Factory, ADLS Gen2, Databricks with Delta Lake, PySpark and dbt in bronze/silver/gold layers, Unity Catalog, separate dev/test/prod and CI/CD through GitHub Actions.</li>
+          <li>Ingest 300,000+ logistics records a day from the warehouse system, carriers and client shops.</li>
+          <li>Rebuilt carrier invoice reconciliation: documented 79 DHL/DPD fee-code mappings and 12 pricing strategies, then replaced ~1,280 lines of legacy SQL with a tested 13-step Python pipeline, FastAPI backend and dashboard.</li>
+          <li>Built the client integrations layer: order API, EDIFACT ORDERS parser and a config-driven SFTP sync on Azure Blob Storage.</li>
+          <li>Migrated a 2.4 TB SQL Server archive (up to 1.3 billion rows per table) to year-partitioned Parquet queried with DuckDB.</li>
+          <li>Automated data checks and alerting: no silent pipeline failures since 2022, about 40% less time to spot anomalies.</li>
+          <li>Replaced manual exports with one reporting layer and Power BI dashboards: reporting time down about 80% for 12 analysts; analyses that raised fulfilment accuracy by 15% and cut returns by 8%.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Jul 2017 – Jul 2019</div>
+      <div>
+        <h3>Freelance Software Developer</h3>
+        <div class="org">Self-employed · Karachi / Germany</div>
+        <ul><li>Java development for clients: e-commerce shop integrations and automated stock-level updates.</li></ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Jan 2015 – Jun 2017</div>
+      <div>
+        <h3>Java Software Engineer</h3>
+        <div class="org">Pacslink Corporation · Karachi</div>
+        <ul><li>Built a hospital management and information system in Java (Spring, Hibernate, J2EE): IPD, OPD, pathology, blood bank, finance and accounts modules.</li></ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Jun 2013 – Dec 2014</div>
+      <div>
+        <h3>Freelance IT Consultant</h3>
+        <div class="org">Self-employed · Karachi</div>
+        <ul><li>Java projects for clients: a face-based attendance system, an HR system and image compression.</li></ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Sep 2009 – May 2013</div>
+      <div>
+        <h3>Senior IT Manager</h3>
+        <div class="org">Go Green Pakistan · Karachi</div>
+        <ul><li>Built the organisation's website and was responsible for all of its IT.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="projects">
+    <h2>Selected projects</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>BookWorm Data Platform</h3>
+        <p>Medallion lakehouse on Azure Databricks over 2.36M books and 15.7M reviews, with Unity Catalog roles and CI/CD.</p>
+        <div class="tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">dbt · 43 tests</span><span class="tag">Unity Catalog</span></div>
+        <div class="links"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+      <article class="card">
+        <h3>dbt-contracts</h3>
+        <p>Web app that generates data contracts for dbt models with an LLM and enforces them in CI. A human approves every contract.</p>
+        <div class="tags"><span class="tag">dbt</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">GitHub Actions</span></div>
+        <div class="links"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Live →</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+      <article class="card">
+        <h3>Zero-Copy Lakehouse</h3>
+        <p>DuckDB, Apache Iceberg and dbt as a low-cost lakehouse, with time travel, schema evolution and a cost comparison against a cloud warehouse.</p>
+        <div class="tags"><span class="tag">DuckDB</span><span class="tag">Iceberg</span><span class="tag">dbt</span></div>
+        <div class="links"><a href="https://github.com/ATHARNAWAZ/zero-copy-lakehouse" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+      <article class="card">
+        <h3>Pipeline Doctor</h3>
+        <p>Retrieval-augmented assistant for debugging data pipeline failures. Lesson learned: retrieval quality matters more than the model.</p>
+        <div class="tags"><span class="tag">AWS Lambda</span><span class="tag">pgvector</span><span class="tag">LlamaIndex</span></div>
+        <div class="links"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+      <article class="card">
+        <h3>dbt Lineage Explorer</h3>
+        <p>Interactive lineage graph for dbt projects with plain-language explanations of upstream and downstream impact.</p>
+        <div class="tags"><span class="tag">React Flow</span><span class="tag">NetworkX</span><span class="tag">dbt manifest</span></div>
+        <div class="links"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+      <article class="card">
+        <h3>More on GitHub</h3>
+        <p>Data quality, lakehouse and tooling experiments, including quarantine-dq and meridian.</p>
+        <div class="links"><a href="https://github.com/ATHARNAWAZ" target="_blank" rel="noopener">github.com/ATHARNAWAZ →</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="skills">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Core</dt><dd>Python, SQL, PySpark, dbt (models, tests, docs, CI)</dd>
+      <dt>Platforms</dt><dd>Databricks, Delta Lake, Unity Catalog, SQL Server, PostgreSQL, DuckDB</dd>
+      <dt>Cloud</dt><dd>Azure (Data Factory, ADLS Gen2, Databricks) in production; AWS (S3, Glue, Athena, Lambda) in projects</dd>
+      <dt>Delivery</dt><dd>Git, GitHub Actions CI/CD, Docker, FastAPI, dev/test/prod environments</dd>
+      <dt>Analytics</dt><dd>Dimensional and medallion modelling, KPI definition, Power BI</dd>
+      <dt>Also used in projects</dt><dd>Apache Iceberg, Airflow, Dagster, Snowflake, Kafka, LLM APIs and RAG</dd>
+    </dl>
+  </section>
+
+  <section class="wrap">
+    <div class="two">
+      <div>
+        <h2>Education &amp; certifications</h2>
+        <h3>BSc Computer Science</h3>
+        <p>Iqra University, Karachi · 2010 – 2014</p>
+        <ul>
+          <li>Databricks Fundamentals (2026)</li>
+          <li>In progress: Databricks Data Engineer Associate, dbt Analytics Engineering, Snowflake SnowPro Core</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Languages</h2>
+        <ul>
+          <li>English: C2</li>
+          <li>German: B1 (telc), used daily at work</li>
+          <li>Urdu: native</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="contact">
+    <div class="contact">
+      <h3>Let's talk</h3>
+      <p>I'm looking for a permanent Senior Data, Analytics or Data Platform Engineer role, in Munich, remote in Germany, or with relocation.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:atharnawaz@live.com">atharnawaz@live.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="Ather_Nawaz_CV.pdf" download>CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">© 2026 Ather Nawaz · Ingolstadt, Germany</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=dark?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
