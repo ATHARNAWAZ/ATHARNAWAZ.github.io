@@ -3,306 +3,376 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ather Nawaz · Senior Data Engineer</title>
-<meta name="description" content="Ather Nawaz, Senior Data Engineer in Ingolstadt, Germany. dbt, Databricks, Python, SQL. Built a logistics company's data platform from scratch.">
+<title>Ather Nawaz, Senior Data Engineer</title>
+<meta name="description" content="Ather Nawaz, Senior Data Engineer in Ingolstadt, Germany. Built and runs a logistics company's data platform end to end: Azure, Databricks, dbt, Python, SQL.">
 <meta name="author" content="Ather Nawaz">
-<meta property="og:title" content="Ather Nawaz · Senior Data Engineer">
-<meta property="og:description" content="Data platforms, dbt, Databricks and the reporting people rely on.">
+<meta property="og:title" content="Ather Nawaz, Senior Data Engineer">
+<meta property="og:description" content="The data platform I built, as a lineage graph you can click through.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f8fa; --surface:#ffffff; --ink:#18202b; --soft:#5a6675; --line:#e3e7ec;
-  --accent:#1f5f99; --accent-soft:#e6eef7; --chip:#eef2f6;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --paper:#eef1ef;      /* blueprint paper */
+  --panel:#f8faf9;
+  --ink:#0f2a2e;        /* deep teal ink */
+  --ink-2:#4b6266;
+  --grid:#d7dedb;
+  --wire:#9fb3b0;
+  --cobalt:#2550b8;     /* links, selection */
+  --amber:#e09a12;      /* data in motion */
+  --ok:#2f7d4f;
+  --cond:"IBM Plex Sans Condensed",Arial Narrow,sans-serif;
+  --sans:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0f141a; --surface:#161d26; --ink:#e7ecf2; --soft:#9aa7b6; --line:#263241;
-    --accent:#6fb0ee; --accent-soft:#1b2a3a; --chip:#1d2733;
+    --paper:#0d1a1c; --panel:#132427; --ink:#e3ecea; --ink-2:#93a9a6; --grid:#1d3134; --wire:#3d5a5d; --cobalt:#7da2ff; --amber:#f2b33d; --ok:#6cc58f;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0f141a; --surface:#161d26; --ink:#e7ecf2; --soft:#9aa7b6; --line:#263241;
-  --accent:#6fb0ee; --accent-soft:#1b2a3a; --chip:#1d2733;
+  --paper:#0d1a1c; --panel:#132427; --ink:#e3ecea; --ink-2:#93a9a6; --grid:#1d3134; --wire:#3d5a5d; --cobalt:#7da2ff; --amber:#f2b33d; --ok:#6cc58f;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:960px;margin:0 auto;padding:0 20px}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
-nav .brand{font-family:var(--mono);font-weight:500;color:var(--ink)}
-nav .links{display:flex;gap:18px;align-items:center;font-size:14px}
-nav .links a{color:var(--soft)}
-nav .links a:hover{color:var(--ink);text-decoration:none}
-#theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 9px;cursor:pointer;font-size:13px}
-@media (max-width:640px){nav .links a.hide-sm{display:none}}
+body{
+  margin:0;color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;background-position:-1px -1px;
+}
+a{color:var(--cobalt);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1120px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px}
 
-header.hero{padding-top:72px;padding-bottom:40px}
-.kicker{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.02em}
-h1{font-size:clamp(34px,6vw,52px);line-height:1.1;margin:10px 0 14px;letter-spacing:-.02em}
-.lead{font-size:clamp(17px,2.2vw,20px);color:var(--soft);max-width:680px;margin:0 0 26px}
-.cta{display:flex;flex-wrap:wrap;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn:hover{text-decoration:none;transform:translateY(-1px)}
-.meta{margin-top:22px;font-size:14px;color:var(--soft);display:flex;flex-wrap:wrap;gap:6px 18px}
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:10px;gap:16px}
+.bar .who{font:600 15px var(--cond);letter-spacing:.01em}
+.bar nav{display:flex;gap:20px;align-items:center;font-size:15px}
+.bar nav a{color:var(--ink-2);text-decoration:none}
+.bar nav a:hover{color:var(--ink)}
+.theme{background:none;border:1px solid var(--wire);color:var(--ink);border-radius:999px;padding:3px 12px;font:500 13px var(--sans);cursor:pointer}
+@media (max-width:620px){.bar nav a.opt{display:none}}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 8px}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
-.stat b{display:block;font-size:26px;letter-spacing:-.01em}
-.stat span{font-size:13px;color:var(--soft)}
-@media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+/* hero */
+.hero{padding-top:44px}
+.hero h1{font:700 clamp(46px,8.4vw,104px)/.92 var(--cond);letter-spacing:-.025em;margin:0}
+.hero .role{font:500 clamp(20px,2.6vw,28px)/1.25 var(--cond);margin:14px 0 0;color:var(--ink-2);max-width:30ch}
+.hero .intro{max-width:62ch;margin:22px 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{font:600 15px var(--sans);padding:10px 18px;border-radius:4px;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn:hover{background:var(--ink);color:var(--paper)}
 
-section{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--line);margin-top:40px}
-h2{font-size:14px;font-family:var(--mono);font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin:0 0 20px}
-.about p{max-width:720px;margin:0 0 14px}
+/* lineage */
+.lineage{margin-top:46px;background:var(--panel);border:1.5px solid var(--ink);border-radius:6px;overflow:hidden}
+.lineage header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--wire)}
+.lineage header h2{font:600 19px var(--cond);margin:0}
+.lineage header p{margin:0;color:var(--ink-2);font-size:14px}
+.canvas{position:relative}
+svg#dag{display:block;width:100%;height:auto}
+.edge{fill:none;stroke:var(--wire);stroke-width:1.6}
+.edge.on{stroke:var(--amber);stroke-width:2.4}
+.node rect{fill:var(--panel);stroke:var(--ink);stroke-width:1.4;rx:5}
+.node.layer-src rect{stroke-dasharray:4 3}
+.node text.t{font:500 13px var(--mono);fill:var(--ink)}
+.node text.s{font:400 11px var(--sans);fill:var(--ink-2)}
+.node{cursor:pointer}
+.node:hover rect,.node.sel rect{stroke:var(--cobalt);stroke-width:2.4}
+.node.dim{opacity:.35}
+.packet{fill:var(--amber)}
+.colhead{font:600 12px var(--cond);fill:var(--ink-2);letter-spacing:.04em}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding:18px;border-top:1px solid var(--wire)}
+.detail h3{font:600 22px var(--cond);margin:0 0 4px}
+.detail .tech{font:400 13px var(--mono);color:var(--ink-2);margin:0}
+.detail p{margin:0}
+@media (max-width:760px){.detail{grid-template-columns:1fr;gap:8px}}
 
-.job{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 0;border-bottom:1px dashed var(--line)}
-.job:last-child{border-bottom:0}
-.job .when{font-family:var(--mono);font-size:13px;color:var(--soft);padding-top:3px}
-.job h3{margin:0;font-size:18px}
-.job .org{color:var(--soft);font-size:15px;margin:2px 0 10px}
-.job ul{margin:0;padding-left:18px}
-.job li{margin:0 0 6px}
-@media (max-width:640px){.job{grid-template-columns:1fr;gap:4px}}
+/* sections */
+section{margin-top:88px}
+section > h2{font:700 clamp(30px,4vw,44px)/1.05 var(--cond);letter-spacing:-.015em;margin:0 0 8px}
+section > .sub{color:var(--ink-2);margin:0 0 28px;max-width:62ch}
 
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media (max-width:720px){.grid{grid-template-columns:1fr}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
-.card h3{margin:0;font-size:17px}
-.card p{margin:0;color:var(--soft);font-size:15px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--mono);font-size:12px;background:var(--chip);border-radius:6px;padding:3px 8px;color:var(--ink)}
-.card .links{margin-top:auto;display:flex;gap:14px;font-size:14px;font-weight:500}
+/* ledger */
+.ledger{width:100%;border-collapse:collapse;background:var(--panel);border:1.5px solid var(--ink)}
+.ledger th{font:600 14px var(--cond);text-align:left;padding:12px 16px;border-bottom:1.5px solid var(--ink);color:var(--ink-2)}
+.ledger td{padding:16px;vertical-align:top;border-bottom:1px solid var(--wire)}
+.ledger tr:last-child td{border-bottom:0}
+.ledger td:first-child{font-weight:600;width:22%}
+.ledger td.out{font:700 20px/1.2 var(--cond);color:var(--ok);width:18%}
+@media (max-width:760px){
+  .ledger thead{display:none}
+  .ledger,.ledger tbody,.ledger tr,.ledger td{display:block;width:100%}
+  .ledger tr{border-bottom:1px solid var(--wire);padding:6px 0}
+  .ledger td{border:0;padding:6px 16px}
+  .ledger td:first-child,.ledger td.out{width:100%}
+}
 
-.skills{display:grid;grid-template-columns:200px 1fr;gap:10px 20px}
-.skills dt{font-weight:600}
-.skills dd{margin:0;color:var(--soft)}
-@media (max-width:640px){.skills{grid-template-columns:1fr;gap:2px}.skills dd{margin-bottom:10px}}
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--ink);margin-left:6px}
+.timeline li{position:relative;padding:0 0 30px 26px}
+.timeline li::before{content:"";position:absolute;left:-8px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.timeline li.now::before{background:var(--amber)}
+.timeline .yr{font:500 14px var(--mono);color:var(--ink-2)}
+.timeline h3{font:600 22px/1.2 var(--cond);margin:2px 0 2px}
+.timeline .org{color:var(--ink-2);margin:0 0 6px}
+.timeline p{margin:0;max-width:68ch}
 
-.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media (max-width:720px){.two{grid-template-columns:1fr}}
-.two h3{font-size:16px;margin:0 0 8px}
-.two p,.two li{color:var(--soft);margin:0 0 6px}
-.two ul{padding-left:18px;margin:0}
+/* projects */
+.repos{border-top:1.5px solid var(--ink)}
+.repo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) auto;gap:20px;padding:20px 0;border-bottom:1px solid var(--wire);align-items:baseline}
+.repo h3{font:600 21px var(--cond);margin:0}
+.repo p{margin:0}
+.repo .stack{font:400 13px var(--mono);color:var(--ink-2);margin-top:6px}
+.repo .go{white-space:nowrap;font-weight:600}
+.repo .go a{margin-left:14px}
+@media (max-width:760px){.repo{grid-template-columns:1fr;gap:6px}.repo .go a{margin-left:0;margin-right:14px}}
 
-.contact{background:var(--accent-soft);border-radius:16px;padding:28px}
-.contact h3{margin:0 0 6px;font-size:22px}
-.contact p{margin:0 0 18px;color:var(--soft)}
-footer{padding-top:28px;padding-bottom:40px;color:var(--soft);font-size:13px}
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1.5px solid var(--ink);background:var(--panel)}
+.skills div{padding:18px;border-right:1px solid var(--wire)}
+.skills div:last-child{border-right:0}
+.skills h3{font:600 18px var(--cond);margin:0 0 8px}
+.skills p{margin:0;color:var(--ink-2);font-size:16px}
+@media (max-width:760px){.skills{grid-template-columns:1fr}.skills div{border-right:0;border-bottom:1px solid var(--wire)}}
+
+/* contact */
+.contact{margin-top:96px;padding:40px 0 56px;border-top:1.5px solid var(--ink)}
+.contact h2{font:700 clamp(34px,5vw,60px)/1 var(--cond);margin:0 0 12px;letter-spacing:-.02em}
+.contact p{max-width:58ch;margin:0}
+.small{font-size:14px;color:var(--ink-2);margin-top:40px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#top">ather.nawaz</a>
-    <div class="links">
-      <a class="hide-sm" href="#experience">Experience</a>
-      <a class="hide-sm" href="#projects">Projects</a>
-      <a class="hide-sm" href="#skills">Skills</a>
+<div class="wrap">
+  <div class="bar">
+    <span class="who">Ather Nawaz</span>
+    <nav aria-label="Sections">
+      <a class="opt" href="#results">Results</a>
+      <a class="opt" href="#experience">Experience</a>
+      <a class="opt" href="#projects">Projects</a>
       <a href="#contact">Contact</a>
-      <button id="theme" type="button" aria-label="Toggle colour theme">Theme</button>
-    </div>
+      <button class="theme" id="theme" type="button" aria-label="Switch light or dark theme">Dark / light</button>
+    </nav>
   </div>
-</nav>
 
-<main id="top">
-  <header class="hero wrap">
-    <div class="kicker">Senior Data Engineer · Ingolstadt, Germany</div>
+  <header class="hero">
     <h1>Ather Nawaz</h1>
-    <p class="lead">I build data platforms that people actually rely on. Since 2019 I've designed and run the entire data platform of an e-commerce fulfilment company, from the first pipeline to today's Databricks lakehouse with dbt.</p>
-    <div class="cta">
-      <a class="btn primary" href="Ather_Nawaz_CV.pdf" download>Download CV</a>
-      <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
+    <p class="role">Senior Data Engineer. Seven years building and running one company's data platform, from the first pipeline to the lakehouse.</p>
+    <p class="intro">In 2019 I joined SCA Logistics &amp; Fulfilment in Ingolstadt as the first person doing IT and data. There was no platform, only exports glued together by hand. Below is what runs today. I designed it, built it and still own it. Click any node to see what it does.</p>
+    <div class="actions">
+      <a class="btn solid" href="Ather_Nawaz_CV.pdf" download>Download CV (PDF)</a>
+      <a class="btn" href="mailto:atharnawaz@live.com">Email me</a>
       <a class="btn" href="https://github.com/ATHARNAWAZ" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <div class="meta">
-      <span>Open to permanent roles: Munich, remote or relocation</span>
-      <span>English C2 · German B1 (telc)</span>
-      <span>German citizen</span>
+      <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </header>
 
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b>7 yrs</b><span>owning a production data platform</span></div>
-      <div class="stat"><b>300k+</b><span>records ingested per day</span></div>
-      <div class="stat"><b>−80%</b><span>reporting time for 12 analysts</span></div>
-      <div class="stat"><b>+10–12%</b><span>shipping margin from one model</span></div>
+  <div class="lineage" aria-label="Lineage of the SCA data platform">
+    <header>
+      <h2>The SCA data platform, source to report</h2>
+      <p>About 300,000 records a day. Dashed boxes are external systems.</p>
+    </header>
+    <div class="canvas"><svg id="dag" role="img" aria-label="Data lineage graph"></svg></div>
+    <div class="detail" id="detail" aria-live="polite">
+      <div><h3 id="d-title">Click any box</h3><p class="tech" id="d-tech">Azure, Databricks, dbt, Python, SQL Server</p></div>
+      <p id="d-text">Every box is a real part of the platform. Selecting one highlights everything upstream and downstream of it, the same way I check impact before changing a model.</p>
     </div>
   </div>
 
-  <section class="wrap about" id="about">
-    <h2>About</h2>
-    <p>I joined SCA Logistics &amp; Fulfilment in 2019 as the first person doing IT and data. There was no platform, just exports from shop systems, carriers and the warehouse glued together by hand. I built the ingestion, then the models, then the reporting, and I still own all of it.</p>
-    <p>What I enjoy most is the step before writing SQL: sitting with operations or finance until a vague question becomes a clear definition. Then I build it so it's tested, documented and boring to run.</p>
+  <section id="results">
+    <h2>Problems I owned, and what changed</h2>
+    <p class="sub">Numbers from production at SCA, not from a demo.</p>
+    <table class="ledger">
+      <thead><tr><th>Problem</th><th>What I built</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Carrier invoices checked by 1,280 lines of SQL nobody fully understood</td><td>Wrote down every rule first: 79 DHL/DPD fee-code mappings and 12 pricing strategies. Then replaced the SQL with a tested 13-step Python pipeline, a FastAPI service and a dashboard for finance.</td><td class="out">Rules documented and testable</td></tr>
+        <tr><td>Reporting meant exporting from Shopify, Billbee and PlentyMarkets every week</td><td>One automated reporting layer: ingestion, dbt models with tests, Power BI on top.</td><td class="out">−80% reporting time for 12 analysts</td></tr>
+        <tr><td>Nobody knew which orders lost money on shipping</td><td>A shipping profitability model joining orders, carrier costs and client pricing.</td><td class="out">+10–12% margin</td></tr>
+        <tr><td>Pipeline failures noticed only when numbers looked wrong</td><td>Automated data checks and alerting across all pipelines, plus dbt tests.</td><td class="out">No silent failures since 2022</td></tr>
+        <tr><td>A 2.4 TB SQL Server archive, slow and expensive to query</td><td>Migrated 19 tables (up to 1.3 billion rows) to year-partitioned Parquet, queried with DuckDB behind a small web app.</td><td class="out">Archive queryable by the business</td></tr>
+      </tbody>
+    </table>
   </section>
 
-  <section class="wrap" id="experience">
+  <section id="experience">
     <h2>Experience</h2>
+    <p class="sub">Software first, data for the last seven years.</p>
+    <ol class="timeline" reversed>
+      <li class="now"><span class="yr">Aug 2019 to now</span><h3>Senior Software Engineer (Data Engineering)</h3><p class="org">SCA Logistics &amp; Fulfilment GmbH, Ingolstadt</p><p>Own the data platform end to end: Azure Data Factory, ADLS Gen2, Databricks with Delta Lake, PySpark and dbt, Unity Catalog, dev/test/prod with GitHub Actions. Built the client integrations too: order API, EDIFACT parser, SFTP sync. I work directly with operations, finance and client account managers.</p></li>
+      <li><span class="yr">Jul 2017 to Jul 2019</span><h3>Freelance Software Developer</h3><p class="org">Self-employed, Karachi and Germany</p><p>Java work for clients while moving to Germany: e-commerce shop integrations and automated stock-level updates.</p></li>
+      <li><span class="yr">Jan 2015 to Jun 2017</span><h3>Java Software Engineer</h3><p class="org">Pacslink Corporation, Karachi</p><p>Hospital management system in Java, Spring, Hibernate and J2EE: in-patient, out-patient, pathology, blood bank, finance and accounts modules.</p></li>
+      <li><span class="yr">Jun 2013 to Dec 2014</span><h3>Freelance IT Consultant</h3><p class="org">Self-employed, Karachi</p><p>Java projects for clients: a face-based attendance system, an HR system and image compression.</p></li>
+      <li><span class="yr">Sep 2009 to May 2013</span><h3>Senior IT Manager</h3><p class="org">Go Green Pakistan, Karachi</p><p>Built the organisation's website and was responsible for all of its IT.</p></li>
+    </ol>
+  </section>
 
-    <div class="job">
-      <div class="when">Aug 2019 – present</div>
-      <div>
-        <h3>Senior Software Engineer (Data Engineering)</h3>
-        <div class="org">SCA Logistics &amp; Fulfilment GmbH · Ingolstadt</div>
-        <ul>
-          <li>Designed and built the company's data platform from scratch: Azure Data Factory, ADLS Gen2, Databricks with Delta Lake, PySpark and dbt in bronze/silver/gold layers, Unity Catalog, separate dev/test/prod and CI/CD through GitHub Actions.</li>
-          <li>Ingest 300,000+ logistics records a day from the warehouse system, carriers and client shops.</li>
-          <li>Rebuilt carrier invoice reconciliation: documented 79 DHL/DPD fee-code mappings and 12 pricing strategies, then replaced ~1,280 lines of legacy SQL with a tested 13-step Python pipeline, FastAPI backend and dashboard.</li>
-          <li>Built the client integrations layer: order API, EDIFACT ORDERS parser and a config-driven SFTP sync on Azure Blob Storage.</li>
-          <li>Migrated a 2.4 TB SQL Server archive (up to 1.3 billion rows per table) to year-partitioned Parquet queried with DuckDB.</li>
-          <li>Automated data checks and alerting: no silent pipeline failures since 2022, about 40% less time to spot anomalies.</li>
-          <li>Replaced manual exports with one reporting layer and Power BI dashboards: reporting time down about 80% for 12 analysts; analyses that raised fulfilment accuracy by 15% and cut returns by 8%.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job">
-      <div class="when">Jul 2017 – Jul 2019</div>
-      <div>
-        <h3>Freelance Software Developer</h3>
-        <div class="org">Self-employed · Karachi / Germany</div>
-        <ul><li>Java development for clients: e-commerce shop integrations and automated stock-level updates.</li></ul>
-      </div>
-    </div>
-
-    <div class="job">
-      <div class="when">Jan 2015 – Jun 2017</div>
-      <div>
-        <h3>Java Software Engineer</h3>
-        <div class="org">Pacslink Corporation · Karachi</div>
-        <ul><li>Built a hospital management and information system in Java (Spring, Hibernate, J2EE): IPD, OPD, pathology, blood bank, finance and accounts modules.</li></ul>
-      </div>
-    </div>
-
-    <div class="job">
-      <div class="when">Jun 2013 – Dec 2014</div>
-      <div>
-        <h3>Freelance IT Consultant</h3>
-        <div class="org">Self-employed · Karachi</div>
-        <ul><li>Java projects for clients: a face-based attendance system, an HR system and image compression.</li></ul>
-      </div>
-    </div>
-
-    <div class="job">
-      <div class="when">Sep 2009 – May 2013</div>
-      <div>
-        <h3>Senior IT Manager</h3>
-        <div class="org">Go Green Pakistan · Karachi</div>
-        <ul><li>Built the organisation's website and was responsible for all of its IT.</li></ul>
-      </div>
+  <section id="projects">
+    <h2>Things I build after work</h2>
+    <p class="sub">Where I try tools before I'd put them in production. All public.</p>
+    <div class="repos">
+      <div class="repo"><h3>BookWorm Data Platform</h3><div><p>Medallion lakehouse on Azure Databricks over 2.36M books and 15.7M reviews, with role-based access in Unity Catalog and CI/CD.</p><p class="stack">databricks · delta lake · dbt (43 tests) · unity catalog</p></div><span class="go"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">Code</a></span></div>
+      <div class="repo"><h3>dbt-contracts</h3><div><p>Generates data contracts for dbt models with an LLM and enforces them in CI. A person approves every contract before it applies.</p><p class="stack">dbt · fastapi · react · github actions</p></div><span class="go"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Live</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">Code</a></span></div>
+      <div class="repo"><h3>Zero-Copy Lakehouse</h3><div><p>DuckDB, Apache Iceberg and dbt as a low-cost lakehouse, with time travel, schema evolution and a cost comparison against a cloud warehouse.</p><p class="stack">duckdb · iceberg · dbt</p></div><span class="go"><a href="https://github.com/ATHARNAWAZ/zero-copy-lakehouse" target="_blank" rel="noopener">Code</a></span></div>
+      <div class="repo"><h3>Pipeline Doctor</h3><div><p>A retrieval-based assistant for debugging failed pipelines. Main lesson: retrieval quality mattered more than the model.</p><p class="stack">aws lambda · pgvector · llamaindex</p></div><span class="go"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code</a></span></div>
+      <div class="repo"><h3>dbt Lineage Explorer</h3><div><p>Interactive lineage graph for any dbt project, with plain-language notes on what a change would affect.</p><p class="stack">dbt manifest · networkx · react flow</p></div><span class="go"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">Code</a></span></div>
     </div>
   </section>
 
-  <section class="wrap" id="projects">
-    <h2>Selected projects</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>BookWorm Data Platform</h3>
-        <p>Medallion lakehouse on Azure Databricks over 2.36M books and 15.7M reviews, with Unity Catalog roles and CI/CD.</p>
-        <div class="tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">dbt · 43 tests</span><span class="tag">Unity Catalog</span></div>
-        <div class="links"><a href="https://github.com/ATHARNAWAZ/bookworm-data-platform" target="_blank" rel="noopener">Code →</a></div>
-      </article>
-      <article class="card">
-        <h3>dbt-contracts</h3>
-        <p>Web app that generates data contracts for dbt models with an LLM and enforces them in CI. A human approves every contract.</p>
-        <div class="tags"><span class="tag">dbt</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">GitHub Actions</span></div>
-        <div class="links"><a href="https://dbt-contracts.vercel.app" target="_blank" rel="noopener">Live →</a><a href="https://github.com/ATHARNAWAZ/dbt-contracts" target="_blank" rel="noopener">Code →</a></div>
-      </article>
-      <article class="card">
-        <h3>Zero-Copy Lakehouse</h3>
-        <p>DuckDB, Apache Iceberg and dbt as a low-cost lakehouse, with time travel, schema evolution and a cost comparison against a cloud warehouse.</p>
-        <div class="tags"><span class="tag">DuckDB</span><span class="tag">Iceberg</span><span class="tag">dbt</span></div>
-        <div class="links"><a href="https://github.com/ATHARNAWAZ/zero-copy-lakehouse" target="_blank" rel="noopener">Code →</a></div>
-      </article>
-      <article class="card">
-        <h3>Pipeline Doctor</h3>
-        <p>Retrieval-augmented assistant for debugging data pipeline failures. Lesson learned: retrieval quality matters more than the model.</p>
-        <div class="tags"><span class="tag">AWS Lambda</span><span class="tag">pgvector</span><span class="tag">LlamaIndex</span></div>
-        <div class="links"><a href="https://github.com/ATHARNAWAZ/pipeline-doctor" target="_blank" rel="noopener">Code →</a></div>
-      </article>
-      <article class="card">
-        <h3>dbt Lineage Explorer</h3>
-        <p>Interactive lineage graph for dbt projects with plain-language explanations of upstream and downstream impact.</p>
-        <div class="tags"><span class="tag">React Flow</span><span class="tag">NetworkX</span><span class="tag">dbt manifest</span></div>
-        <div class="links"><a href="https://github.com/ATHARNAWAZ/dbt-lineage-explorer" target="_blank" rel="noopener">Code →</a></div>
-      </article>
-      <article class="card">
-        <h3>More on GitHub</h3>
-        <p>Data quality, lakehouse and tooling experiments, including quarantine-dq and meridian.</p>
-        <div class="links"><a href="https://github.com/ATHARNAWAZ" target="_blank" rel="noopener">github.com/ATHARNAWAZ →</a></div>
-      </article>
+  <section id="skills">
+    <h2>Tools, honestly sorted</h2>
+    <p class="sub">What I run in production every day, and what I've used in my own projects.</p>
+    <div class="skills">
+      <div><h3>Every day in production</h3><p>Python, SQL, PySpark, dbt, Databricks, Delta Lake, Unity Catalog, Azure Data Factory, ADLS Gen2, SQL Server, Power BI, GitHub Actions, Docker, FastAPI</p></div>
+      <div><h3>In my own projects</h3><p>Apache Iceberg, DuckDB, Airflow, Dagster, Snowflake, AWS (S3, Glue, Athena, Lambda), Kafka, Terraform, LLM APIs, RAG</p></div>
+      <div><h3>Languages and learning</h3><p>English C2, German B1 (telc, used daily at work), Urdu native. BSc Computer Science. Databricks Fundamentals; working on Databricks Data Engineer Associate and SnowPro Core.</p></div>
     </div>
   </section>
 
-  <section class="wrap" id="skills">
-    <h2>Skills</h2>
-    <dl class="skills">
-      <dt>Core</dt><dd>Python, SQL, PySpark, dbt (models, tests, docs, CI)</dd>
-      <dt>Platforms</dt><dd>Databricks, Delta Lake, Unity Catalog, SQL Server, PostgreSQL, DuckDB</dd>
-      <dt>Cloud</dt><dd>Azure (Data Factory, ADLS Gen2, Databricks) in production; AWS (S3, Glue, Athena, Lambda) in projects</dd>
-      <dt>Delivery</dt><dd>Git, GitHub Actions CI/CD, Docker, FastAPI, dev/test/prod environments</dd>
-      <dt>Analytics</dt><dd>Dimensional and medallion modelling, KPI definition, Power BI</dd>
-      <dt>Also used in projects</dt><dd>Apache Iceberg, Airflow, Dagster, Snowflake, Kafka, LLM APIs and RAG</dd>
-    </dl>
-  </section>
-
-  <section class="wrap">
-    <div class="two">
-      <div>
-        <h2>Education &amp; certifications</h2>
-        <h3>BSc Computer Science</h3>
-        <p>Iqra University, Karachi · 2010 – 2014</p>
-        <ul>
-          <li>Databricks Fundamentals (2026)</li>
-          <li>In progress: Databricks Data Engineer Associate, dbt Analytics Engineering, Snowflake SnowPro Core</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Languages</h2>
-        <ul>
-          <li>English: C2</li>
-          <li>German: B1 (telc), used daily at work</li>
-          <li>Urdu: native</li>
-        </ul>
-      </div>
+  <footer class="contact" id="contact">
+    <h2>Looking for my next platform to own.</h2>
+    <p>Permanent Senior Data, Analytics or Data Platform Engineer roles in Munich, remote in Germany, or with relocation. German citizen, based in Ingolstadt.</p>
+    <div class="actions">
+      <a class="btn solid" href="mailto:atharnawaz@live.com">atharnawaz@live.com</a>
+      <a class="btn" href="Ather_Nawaz_CV.pdf" download>CV (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-  </section>
-
-  <section class="wrap" id="contact">
-    <div class="contact">
-      <h3>Let's talk</h3>
-      <p>I'm looking for a permanent Senior Data, Analytics or Data Platform Engineer role, in Munich, remote in Germany, or with relocation.</p>
-      <div class="cta">
-        <a class="btn primary" href="mailto:atharnawaz@live.com">atharnawaz@live.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/atharnawaz" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="Ather_Nawaz_CV.pdf" download>CV (PDF)</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="wrap">© 2026 Ather Nawaz · Ingolstadt, Germany</footer>
+    <p class="small">© 2026 Ather Nawaz</p>
+  </footer>
+</div>
 
 <script>
 (function(){
-  var root=document.documentElement, btn=document.getElementById('theme');
+  // theme
+  var root=document.documentElement;
   try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
-  btn.addEventListener('click',function(){
+  document.getElementById('theme').addEventListener('click',function(){
     var cur=root.getAttribute('data-theme');
-    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var next=dark?'light':'dark';
-    root.setAttribute('data-theme',next);
+    var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=dark?'light':'dark'; root.setAttribute('data-theme',next);
     try{localStorage.setItem('theme',next);}catch(e){}
   });
+
+  // lineage graph: columns = stages, nodes are real parts of the platform
+  var cols=['Sources','Ingestion','Bronze','Silver (dbt)','Gold (dbt)','Used by'];
+  var N=[
+    {id:'wms',c:0,r:0,t:'warehouse_system',s:'WMS, SQL Server',src:1,h:'Warehouse management system',k:'SQL Server',d:'Orders, stock movements and shipments from our warehouse system. The biggest single source.'},
+    {id:'car',c:0,r:1,t:'carriers',s:'DHL, DPD invoices',src:1,h:'Carrier feeds',k:'Files, Excel, CSV',d:'Shipment events and invoices from DHL and DPD. I wrote the DHL bulk loader that lands 300k+ rows a day.'},
+    {id:'shop',c:0,r:2,t:'client_shops',s:'Shopify, Billbee, xentral…',src:1,h:'Client shops',k:'REST/JSON, EDIFACT, SFTP',d:'Orders from our fulfilment clients in their own formats: two JSON formats, EDIFACT ORDERS (D01B) and SFTP file drops.'},
+    {id:'arc',c:0,r:3,t:'sql_archive',s:'2.4 TB, 19 tables',src:1,h:'Historical archive',k:'SQL Server → Parquet',d:'Years of history, up to 1.3 billion rows per table. Too slow and expensive to keep querying in place.'},
+
+    {id:'adf',c:1,r:0,t:'adf_pipelines',s:'Azure Data Factory',h:'Ingestion with Azure Data Factory',k:'Azure Data Factory, ADLS Gen2',d:'Scheduled copies from operational databases and file drops into the lake, with monitoring on every run.'},
+    {id:'py',c:1,r:1,t:'python_loaders',s:'pyodbc bulk loads',h:'Python loaders',k:'Python, pyodbc fast_executemany',d:'Bulk loaders for carrier data where the files are messy and volume is high. Built for re-runs: loading the same file twice changes nothing.'},
+    {id:'int',c:1,r:2,t:'integrations',s:'order API, EDIFACT, SFTP',h:'Client integrations layer',k:'Python, REST, EDIFACT, SFTP, Azure Blob',d:'Normalises every client format into one schema, and sends stock levels and tracking numbers back. New clients are added by configuration, not code.'},
+    {id:'pq',c:1,r:3,t:'parquet_export',s:'year-partitioned',h:'Archive migration',k:'Python, Parquet',d:'Exported the archive table by table into Parquet files partitioned by year.'},
+
+    {id:'brz',c:2,r:1,t:'bronze.*',s:'Delta, Auto Loader',h:'Bronze layer',k:'Databricks, Delta Lake, Auto Loader',d:'Raw data as it arrived, append-only, so any day can be rebuilt from scratch.'},
+    {id:'duck',c:2,r:3,t:'duckdb_lake',s:'Parquet + DuckDB',h:'Archive lakehouse',k:'DuckDB, Parquet',d:'The archive now lives as files queried with DuckDB. No database server needed for history.'},
+
+    {id:'stg',c:3,r:1,t:'stg_* / int_*',s:'PySpark + dbt, tested',h:'Silver: cleaned and conformed',k:'dbt, PySpark, dbt tests',d:'Staging and intermediate models: types fixed, duplicates removed, client formats conformed. Tests run on every change.'},
+
+    {id:'fs',c:4,r:0,t:'fct_shipments',s:'orders, costs, margin',h:'fct_shipments',k:'dbt marts',d:'One row per shipment with carrier cost and client price. The base for the profitability model.'},
+    {id:'fi',c:4,r:1,t:'fct_invoices',s:'79 fee-code mappings',h:'fct_invoices',k:'dbt, Python',d:'Every invoice line mapped to a fee code and pricing strategy, so overcharges show up instead of hiding in SQL.'},
+    {id:'dim',c:4,r:2,t:'dim_client',s:'Unity Catalog',h:'Dimensions',k:'dbt, Unity Catalog',d:'Clients, products and carriers, with access controlled in Unity Catalog.'},
+
+    {id:'bi',c:5,r:0,t:'power_bi',s:'12 analysts, −80% time',h:'Power BI reporting',k:'Power BI',d:'Daily reports for operations, finance and management. Reporting time dropped by about 80% once the manual exports were gone.'},
+    {id:'rec',c:5,r:1,t:'invoice_check',s:'FastAPI + dashboard',h:'Invoice reconciliation',k:'Python, FastAPI, Docker',d:'Finance uses it to dispute carrier overcharges. Replaced about 1,280 lines of SQL nobody fully understood.'},
+    {id:'api',c:5,r:2,t:'client_feedback',s:'stock + tracking out',h:'Data back to clients',k:'SFTP, REST',d:'Stock levels and tracking numbers sent back to each client shop automatically.'},
+    {id:'app',c:5,r:3,t:'archive_app',s:'FastAPI + React',h:'Archive explorer',k:'FastAPI, React, DuckDB',d:'A small web app so business users can query years of history themselves.'}
+  ];
+  var E=[['wms','adf'],['car','py'],['shop','int'],['arc','pq'],['adf','brz'],['py','brz'],['int','brz'],['pq','duck'],
+         ['brz','stg'],['stg','fs'],['stg','fi'],['stg','dim'],['fs','bi'],['fi','bi'],['dim','bi'],['fi','rec'],['dim','api'],['int','api'],['duck','app']];
+  var byId={}; N.forEach(function(n){byId[n.id]=n;});
+  var svg=document.getElementById('dag'), NS='http://www.w3.org/2000/svg';
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+
+  function layout(){
+    var vertical = svg.parentNode.clientWidth < 760;
+    var W,H,nw=160,nh=46;
+    if(!vertical){
+      W=1120;H=330;var gx=(W-40-nw)/5,top=40,gy=68;
+      N.forEach(function(n){n.x=20+n.c*gx;n.y=top+n.r*gy;});
+    } else {
+      // stages become rows; nodes in a stage spread across
+      nw=150;nh=46;W=340;var rowH=96,top=30;
+      var counts={}; N.forEach(function(n){(counts[n.c]=counts[n.c]||[]).push(n);});
+      var y=top; Object.keys(counts).forEach(function(c){
+        var list=counts[c]; var perRow=2; var rows=Math.ceil(list.length/perRow);
+        list.forEach(function(n,i){var col=i%perRow,row=Math.floor(i/perRow); n.x=10+col*(nw+20); n.y=y+row*58;});
+        counts[c].y0=y; y+=rows*58+38;
+      });
+      H=y; counts._v=1; svg._stageY=counts;
+    }
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+    var gE=el('g',{},svg), gN=el('g',{},svg), gP=el('g',{},svg);
+    // column/row heads
+    cols.forEach(function(name,i){
+      if(!vertical){var gx=(W-40-nw)/5; var t=el('text',{x:20+i*gx,y:24,'class':'colhead'},svg);t.textContent=name;}
+      else {var st=svg._stageY[i]; var t2=el('text',{x:10,y:st.y0-8,'class':'colhead'},svg);t2.textContent=name;}
+    });
+    E.forEach(function(e){
+      var a=byId[e[0]],b=byId[e[1]],d;
+      if(!vertical){var x1=a.x+nw,y1=a.y+nh/2,x2=b.x,y2=b.y+nh/2,m=(x1+x2)/2;d='M'+x1+','+y1+' C'+m+','+y1+' '+m+','+y2+' '+x2+','+y2;}
+      else {var x1=a.x+nw/2,y1=a.y+nh,x2=b.x+nw/2,y2=b.y,m=(y1+y2)/2;d='M'+x1+','+y1+' C'+x1+','+m+' '+x2+','+m+' '+x2+','+y2;}
+      e.p=el('path',{d:d,'class':'edge'},gE);
+    });
+    N.forEach(function(n){
+      var g=el('g',{'class':'node'+(n.src?' layer-src':''),transform:'translate('+n.x+','+n.y+')',tabindex:0,role:'button','aria-label':n.h},gN);
+      el('rect',{width:nw,height:nh,rx:5},g);
+      var t=el('text',{x:10,y:19,'class':'t'},g);t.textContent=n.t;
+      var s=el('text',{x:10,y:36,'class':'s'},g);s.textContent=n.s;
+      n.g=g;
+      g.addEventListener('click',function(){select(n.id);});
+      g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();select(n.id);}});
+    });
+    svg._packets=gP;
+    if(current)select(current,true);
+  }
+
+  function related(id){
+    var up={},down={};
+    (function walkUp(x){E.forEach(function(e){if(e[1]===x&&!up[e[0]]){up[e[0]]=1;walkUp(e[0]);}});})(id);
+    (function walkDown(x){E.forEach(function(e){if(e[0]===x&&!down[e[1]]){down[e[1]]=1;walkDown(e[1]);}});})(id);
+    var all={}; all[id]=1; for(var k in up)all[k]=1; for(var k2 in down)all[k2]=1; return all;
+  }
+
+  var current=null;
+  function select(id,quiet){
+    current=id; var n=byId[id], rel=related(id);
+    N.forEach(function(m){m.g.classList.toggle('sel',m.id===id);m.g.classList.toggle('dim',!rel[m.id]);});
+    E.forEach(function(e){e.p.classList.toggle('on',!!(rel[e[0]]&&rel[e[1]]));});
+    document.getElementById('d-title').textContent=n.h;
+    document.getElementById('d-tech').textContent=n.k;
+    document.getElementById('d-text').textContent=n.d;
+    if(!quiet)flow(E.filter(function(e){return rel[e[0]]&&rel[e[1]];}));
+  }
+
+  // one orchestrated moment: packets travel source → report on load, and along the path you select
+  function flow(edges){
+    if(reduce)return;
+    var gP=svg._packets; while(gP.firstChild)gP.removeChild(gP.firstChild);
+    edges.forEach(function(e,i){
+      var c=el('circle',{r:3.6,'class':'packet'},gP);
+      var path=e.p, len=path.getTotalLength(), stage=byId[e[0]].c, start=performance.now()+stage*380+(i%3)*90, dur=900;
+      (function step(now){
+        var t=(now-start)/dur;
+        if(t<0){c.setAttribute('opacity',0);return requestAnimationFrame(step);}
+        if(t>1){c.remove();return;}
+        var pt=path.getPointAtLength(t*len); c.setAttribute('cx',pt.x); c.setAttribute('cy',pt.y); c.setAttribute('opacity',1);
+        requestAnimationFrame(step);
+      })(performance.now());
+    });
+  }
+
+  layout();
+  setTimeout(function(){flow(E);},400);
+  var rt; addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150);});
 })();
 </script>
 </body>
