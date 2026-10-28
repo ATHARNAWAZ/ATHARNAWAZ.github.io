@@ -71,8 +71,6 @@ a{color:var(--signal);text-underline-offset:3px;text-decoration-thickness:1px}
 /* ---------- hero: headline + diagnosis console ---------- */
 .hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:start;padding-top:28px;padding-bottom:72px}
 .hero .who{margin:0 0 16px;font:600 15px var(--wide);font-variation-settings:"wdth" 110;color:var(--ink-2)}
-.hero .who b{color:var(--go);font-weight:600;white-space:nowrap}
-.hero .who b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin:0 7px 1px 0}
 .hero h1{margin:0;font-weight:900;font-variation-settings:"wdth" 100;font-size:clamp(38px,4.6vw,66px);line-height:.98;letter-spacing:-.03em;text-wrap:balance}
 .hero .why{margin:22px 0 0;max-width:50ch;color:var(--ink)}
 .hero .why + .why{margin-top:12px;color:var(--ink-2)}
@@ -282,7 +280,7 @@ svg#dag{display:block;width:100%;height:auto}
 
   <header class="hero" id="top">
     <div>
-      <p class="who">AI Data Engineer in Ingolstadt. <b>Open to roles from January 2027</b></p>
+      <p class="who">AI Data Engineer in Ingolstadt</p>
       <h1>Data systems that catch their own failures and explain them.</h1>
       <p class="why">Seven years owning a production data platform that moves 300,000 records a day, with anomaly detection that flags problems before anyone opens a report.</p>
       <p class="why">On top of that: Pipeline Doctor, my open-source tool that reads a failed dbt run, traces the lineage and has an LLM explain the root cause.</p>
